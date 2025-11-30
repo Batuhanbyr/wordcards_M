@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WordCards - Learn English with AI</title>
+    <meta name="description" content="Master English vocabulary with AI conversations, video context, and smart flashcards. The ultimate pocket tutor.">
+    
+    <style>
+        :root {
+            /* Variables */
+            --bg-color: #ffffff;
+            --secondary-bg: #f5f5f7;
+            --text-color: #1d1d1f;
+            --secondary-text: #86868b;
+            --accent-color: #0071e3;
+            --card-bg: #ffffff;
+            --section-spacing: 120px;
+            --shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        /* Typography & Utilities */
+        h1, h2, h3 { margin: 0; font-weight: 600; letter-spacing: -0.02em; color: #1d1d1f; }
+        p { line-height: 1.6; color: var(--secondary-text); font-size: 1.1rem; }
+        a { text-decoration: none; color: inherit; transition: color 0.3s; }
+        .container { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+        .text-center { text-align: center; }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #1d1d1f 0%, #434344 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* Navigation */
+        nav {
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo { 
+            font-size: 1.1rem; 
+            font-weight: 600; 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+            color: #1d1d1f;
+            white-space: nowrap; /* Mobilde taşmayı önle */
+        }
+        .logo img { 
+            width: 32px; 
+            height: 32px; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .nav-links { display: flex; align-items: center; }
+        .nav-links a { 
+            font-size: 0.9rem; 
+            margin-left: 25px; 
+            color: var(--text-color); 
+            font-weight: 500; 
+        }
+        .nav-links a:hover { color: var(--accent-color); }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-top: 100px; 
+            padding-bottom: 60px; 
+        }
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+            max-width: 900px;
+            line-height: 1.05;
+        }
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 650px;
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+        .download-btn {
+            display: inline-block;
+            transition: transform 0.2s;
+            margin-bottom: 60px;
+        }
+        .download-btn:hover { transform: scale(1.03); }
+
+        /* iPhone Wrapper */
+        .iphone-wrapper {
+            position: relative;
+            width: 300px; 
+            max-width: 85vw; /* Mobilde taşmayı önle */
+            aspect-ratio: 9/19.5;
+            height: auto;
+            margin: 0 auto;
+            border: 8px solid #222;
+            border-radius: 40px;
+            overflow: hidden;
+            background: #000;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        .iphone-screen {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Features */
+        .features { 
+            background-color: var(--secondary-bg);
+            padding: var(--section-spacing) 0;
+        }
+        .section-title { font-size: 3rem; margin-bottom: 60px; text-align: center; color: #1d1d1f; }
+        
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+        .bento-card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 24px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        .bento-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+        .bento-card h3 { font-size: 1.6rem; margin-bottom: 12px; }
+        .bento-card p { font-size: 1rem; color: var(--secondary-text); }
+        .bento-card.wide { grid-column: span 2; }
+        
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 20px;
+            display: block;
+            color: var(--accent-color);
+        }
+
+        /* Showcase */
+        .showcase {
+            padding: var(--section-spacing) 0;
+            overflow: hidden;
+            background: #fff;
+        }
+        .scrolling-wrapper {
+            display: flex;
+            gap: 30px;
+            padding: 40px 20px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; 
+        }
+        .scrolling-wrapper::-webkit-scrollbar { display: none; }
+
+        .phone-mockup-container {
+            flex-shrink: 0;
+            scroll-snap-align: center;
+            transform: perspective(1000px) rotateY(0deg); 
+            transition: transform 0.5s;
+        }
+        .phone-mockup-container:hover { transform: perspective(1000px) rotateY(5deg); }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary-bg);
+            padding: 60px 0;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        .footer-links {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .footer-links a { color: var(--secondary-text); }
+        .footer-links a:hover { color: var(--text-color); text-decoration: underline; }
+        .copyright { color: var(--secondary-text); margin-top: 10px; }
+
+        /* --- RESPONSIVE AYARLARI (DÜZELTİLDİ) --- */
+        @media (max-width: 768px) {
+            /* Navigasyon Düzeltmesi */
+            nav { padding: 12px 0; }
+            
+            .nav-content {
+                flex-direction: row; /* Yan yana kalmaya zorla */
+                justify-content: space-between; /* İki uca yasla */
+                align-items: center;
+            }
+
+            .logo { 
+                font-size: 1rem; /* Logoyu hafif küçült */
+                gap: 8px;
+            }
+            .logo img { width: 28px; height: 28px; }
+
+            .nav-links {
+                display: flex; /* Görünür yap */
+                gap: 15px; /* Linkler arası boşluğu azalt */
+            }
+            .nav-links a {
+                margin-left: 0; /* Sol boşluğu sıfırla */
+                font-size: 0.85rem; /* Yazıyı hafif küçült */
+            }
+
+            /* Hero */
+            .hero { padding-top: 120px; }
+            .hero h1 { font-size: 2.8rem; padding: 0 10px; }
+            .hero p { font-size: 1.2rem; padding: 0 20px; }
+            
+            /* iPhone Wrapper Mobil */
+            .iphone-wrapper {
+                max-width: 260px;
+                border-width: 6px;
+                border-radius: 30px;
+            }
+
+            /* Bento Grid */
+            .section-title { font-size: 2.2rem; margin-bottom: 40px; }
+            .bento-grid { grid-template-columns: 1fr; }
+            .bento-card.wide { grid-column: span 1; }
+            .bento-card { padding: 30px; }
+
+            /* Footer */
+            .footer-links { gap: 15px; flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigasyon -->
+    <nav>
+        <div class="container nav-content">
+            <div class="logo">
+                <img src="icon.jpeg" alt="Icon" onerror="this.style.display='none'">
+                WordCards
+            </div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="mailto:wordcards.helpdesk@gmail.com">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="gradient-text reveal">Your English Teacher<br>in Your Pocket.</h1>
+            <p class="reveal">Master vocabulary with AI conversations, immersive videos, and smart flashcards.</p>
+            
+            <a href="#" class="download-btn reveal">
+                <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store" style="height: 60px;">
+            </a>
+
+            <!-- Telefon Görseli -->
+            <div class="iphone-wrapper reveal">
+                <img src="screen1.jpeg" alt="App Screen" class="iphone-screen" onerror="this.src='https://placehold.co/300x600/eee/333?text=App+Screen'">
+            </div>
+        </div>
+    </section>
+
+    <!-- Özellikler (SVG İkonlar) -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title reveal">Why WordCards?</h2>
+            
+            <div class="bento-grid">
+                <!-- Card 1: AI -->
+                <div class="bento-card wide reveal">
+                    <span class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9-9 9-9-1.8-9-9 1.8-9 9-9z"/><path d="M8 12l3 3 5-5"/></svg>
+                    </span>
+                    <h3>AI-Powered Conversations</h3>
+                    <p>Chat freely with an AI tutor. Get instant feedback on your grammar and pronunciation. It's like having a private tutor available 24/7.</p>
+                </div>
+
+                <!-- Card 2: Video -->
+                <div class="bento-card reveal">
+                    <span class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/></svg>
+                    </span>
+                    <h3>Video Context</h3>
+                    <p>See how words are used in real-life movie clips and Ted-Ed videos.</p>
+                </div>
+
+                <!-- Card 3: Memory -->
+                <div class="bento-card reveal">
+                    <span class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                    </span>
+                    <h3>Smart Review</h3>
+                    <p>Spaced repetition ensures you review words exactly when you're about to forget them.</p>
+                </div>
+
+                <!-- Card 4: Offline -->
+                <div class="bento-card wide reveal">
+                    <span class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    </span>
+                    <h3>Offline Learning</h3>
+                    <p>No internet? No problem. Download your decks and continue learning on the subway, on a plane, or anywhere.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ekran Görüntüleri -->
+    <section class="showcase">
+        <div class="container">
+            <h2 class="section-title reveal">A Glance Inside</h2>
+            
+            <div class="scrolling-wrapper reveal">
+                <div class="phone-mockup-container">
+                    <div class="iphone-wrapper" style="margin: 0;">
+                        <img src="screen2.jpeg" alt="Chat Mode" class="iphone-screen" onerror="this.src='https://placehold.co/300x600/eee/333?text=Chat+Mode'">
+                    </div>
+                </div>
+                <div class="phone-mockup-container">
+                    <div class="iphone-wrapper" style="margin: 0;">
+                        <img src="screen3.jpeg" alt="Video Mode" class="iphone-screen" onerror="this.src='https://placehold.co/300x600/eee/333?text=Video+Mode'">
+                    </div>
+                </div>
+                <div class="phone-mockup-container">
+                    <div class="iphone-wrapper" style="margin: 0;">
+                        <img src="screen4.jpeg" alt="Stats" class="iphone-screen" onerror="this.src='https://placehold.co/300x600/eee/333?text=Stats'">
+                    </div>
+                </div>
+            </div>
+            <p class="text-center" style="margin-top: 20px; color: #86868b;">Swipe to explore</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-links">
+                <a href="https://batuhanbyr.github.io/wordcard_PP/">Privacy Policy</a>
+                <a href="https://batuhanbyr.github.io/wordcards_TS/">Terms of Use</a>
+                <a href="https://batuhanbyr.github.io/wordcards_S/">Support</a>
+            </div>
+            <div class="copyright">
+                &copy; 2025 WordCards. All rights reserved.
+            </div>
+            <p style="font-size: 0.7rem; color: #999; max-width: 600px;">
+                Apple and the Apple logo are trademarks of Apple Inc., registered in the U.S. and other countries. App Store is a service mark of Apple Inc.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Animasyon Scripti -->
+    <script>
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+
+</body>
+</html>
