@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support - WordCards</title>
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --secondary-bg: #f5f5f7;
+            --text-color: #1d1d1f;
+            --secondary-text: #86868b;
+            --accent-color: #0071e3;
+        }
+        * { box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            background: var(--bg-color);
+        }
+        nav {
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        .nav-content {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-color);
+            text-decoration: none;
+        }
+        .logo img { width: 32px; height: 32px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .nav-links a {
+            font-size: 0.9rem;
+            margin-left: 25px;
+            color: var(--text-color);
+            font-weight: 500;
+            text-decoration: none;
+        }
+        .nav-links a:hover { color: var(--accent-color); }
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 120px 20px 80px;
+        }
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--text-color);
+            margin-bottom: 16px;
+        }
+        h2 {
+            color: var(--text-color);
+            margin-top: 48px;
+            font-size: 1.3em;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            border-bottom: 1px solid #e5e5ea;
+            padding-bottom: 8px;
+        }
+        h3 {
+            color: var(--text-color);
+            margin-top: 28px;
+            font-size: 1.05em;
+            font-weight: 600;
+        }
+        p { margin-bottom: 16px; color: #3a3a3c; font-size: 0.97rem; }
+        ul { margin-bottom: 16px; padding-left: 20px; }
+        li { margin-bottom: 6px; color: #3a3a3c; font-size: 0.97rem; }
+        a { color: var(--accent-color); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .contact-box {
+            background: linear-gradient(135deg, #f0f7ff 0%, #e8f4ff 100%);
+            border: 1px solid #c8e0ff;
+            padding: 28px 32px;
+            border-radius: 20px;
+            margin: 32px 0;
+        }
+        .contact-box h3 { margin-top: 0; font-size: 1.15rem; }
+        .contact-box p { margin-bottom: 8px; }
+        .contact-box p:last-child { margin-bottom: 0; }
+        footer {
+            background-color: var(--secondary-bg);
+            padding: 48px 0;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+        .footer-content { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+        .footer-links { display: flex; gap: 25px; flex-wrap: wrap; justify-content: center; }
+        .footer-links a { color: var(--secondary-text); text-decoration: none; }
+        .footer-links a:hover { color: var(--text-color); text-decoration: underline; }
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8rem; }
+            .contact-box { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-content">
+            <a href="/" class="logo">
+                <img src="/icon.jpeg" alt="WordCards" onerror="this.style.display='none'">
+                WordCards
+            </a>
+            <div class="nav-links">
+                <a href="/#features">Features</a>
+                <a href="mailto:wordcards.helpdesk@gmail.com">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="content">
+
+        <h1>Support</h1>
+
+        <p>Thank you for using WordCards! We are dedicated to helping you learn and practice English effectively. If you are experiencing issues with the app, have suggestions for improvements, or have questions about your subscription, we are here to help.</p>
+
+        <div class="contact-box">
+            <h3>Contact Us</h3>
+            <p>For all support inquiries, bug reports, or feedback, please email us directly at:</p>
+            <p><strong>Email:</strong> <a href="mailto:wordcards.helpdesk@gmail.com">wordcards.helpdesk@gmail.com</a></p>
+            <p>We aim to respond to all inquiries within 24–48 hours.</p>
+        </div>
+
+        <h2>Common Topics</h2>
+
+        <h3>Account &amp; Subscription Management</h3>
+        <p>If you need to manage your subscription (upgrade, downgrade, or cancel), please do so through your device settings:</p>
+        <ul>
+            <li><strong>iOS:</strong> Go to Settings &gt; [Your Name] &gt; Subscriptions.</li>
+            <li><strong>Android:</strong> Go to Google Play Store &gt; Profile Icon &gt; Payments &amp; subscriptions.</li>
+        </ul>
+
+        <h3>Account Deletion</h3>
+        <p>If you wish to delete your WordCards account and all associated data, you can do so directly within the app settings under "Delete Account". Alternatively, you may email us at <a href="mailto:wordcards.helpdesk@gmail.com">wordcards.helpdesk@gmail.com</a> with the subject line "Account Deletion Request," and we will process your request in accordance with our Privacy Policy.</p>
+
+        <h3>Bug Reports</h3>
+        <p>If you encounter a bug, please email us with the following details to help us fix it faster:</p>
+        <ul>
+            <li>Device model (e.g., iPhone 15, Samsung Galaxy S23)</li>
+            <li>Operating System version (e.g., iOS 17, Android 14)</li>
+            <li>A brief description of the issue and screenshots if possible.</li>
+        </ul>
+
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="/privacy">Privacy Policy</a>
+                <a href="/support">Support</a>
+            </div>
+            <div style="color: var(--secondary-text);">&copy; 2026 WordCards. All rights reserved.</div>
+        </div>
+    </footer>
+
+</body>
+</html>
