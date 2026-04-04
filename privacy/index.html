@@ -146,7 +146,7 @@
     <div class="content">
 
     <h1>PRIVACY POLICY</h1>
-    <span class="date">Last updated November 15, 2025</span>
+    <span class="date">Last updated April 4, 2026</span>
 
     <p>This Privacy Notice for Batuhan Bayır (doing business as WordCards) ("<strong>we</strong>," "<strong>us</strong>," or "<strong>our</strong>"), describes how and why we might access, collect, store, use, and/or share ("<strong>process</strong>") your personal information when you use our services ("<strong>Services</strong>"), including when you:</p>
     <ul>
@@ -195,12 +195,36 @@
     <p><strong>Sensitive Information.</strong> We do not process sensitive information.</p>
     <p><strong>Payment Data.</strong> We may collect data necessary to process your payment if you choose to make purchases, such as your payment instrument number, and the security code associated with your payment instrument. All payment data is handled and stored by Apple Store In-App Payments and Google Play In-App Payments. You may find their privacy notice link(s) here: <a href="https://www.apple.com/legal/privacy/" target="_blank">https://www.apple.com/legal/privacy/</a> and <a href="https://policies.google.com/privacy" target="_blank">https://policies.google.com/privacy</a>.</p>
     <p>We do not directly collect or store any payment card details. All in-app purchases and subscription payments are processed securely by third-party payment processors, namely the Apple App Store and the Google Play Store. The information you provide for a purchase is sent directly to these processors, and we only receive a confirmation token or receipt to validate the transaction. We encourage you to review their privacy policies to understand how they handle your data.</p>
-    <p><strong>Social Media Login Data.</strong> We may provide you with the option to register with us using your existing social media account details, like your Facebook, X, or other social media account. If you choose to register in this way, we will collect certain profile information about you from the social media provider, as described in the section called "<a href="#sociallogins">HOW DO WE HANDLE YOUR SOCIAL LOGINS?</a>" below.</p>
+    <p><strong>Social Login Data.</strong> We offer the option to register or log in using your existing Google or Apple account. If you choose to do so, we will collect certain profile information from that provider (name, email address, and profile photo where available), as described in "<a href="#sociallogins">HOW DO WE HANDLE YOUR SOCIAL LOGINS?</a>" below. When you sign in, your user ID is also shared with RevenueCat to verify your subscription status.</p>
     <p><strong>Application Data.</strong> If you use our application(s), we also may collect the following information if you choose to provide us with access or permission:</p>
     <ul>
-        <li><em>Mobile Device Access.</em> We may request access or permission to certain features from your mobile device, including your mobile device's camera, microphone, storage, and other features. If you wish to change our access or permissions, you may do so in your device's settings.</li>
-        <li><em>Mobile Device Data.</em> We automatically collect device information (such as your mobile device ID, model, and manufacturer), operating system, version information and system configuration information, device and application identification numbers, browser type and version, hardware model Internet service provider and/or mobile carrier, and Internet Protocol (IP) address (or proxy server). If you are using our application(s), we may also collect information about the phone network associated with your mobile device, your mobile device’s operating system or platform, the type of mobile device you use, your mobile device’s unique device ID, and information about the features of our application(s) you accessed.</li>
+        <li><em>Mobile Device Access.</em> We may request access or permission to certain features from your mobile device, including your mobile device’s camera, microphone, storage, and notifications. If you wish to change our access or permissions, you may do so in your device’s settings.</li>
+        <li><em>Mobile Device Data.</em> We automatically collect device information (such as your mobile device ID, model, and manufacturer), operating system, version information and system configuration information, device and application identification numbers, hardware model, Internet service provider and/or mobile carrier, and Internet Protocol (IP) address (or proxy server).</li>
+        <li><em>Push &amp; Local Notifications.</em> With your permission (requested on iOS and Android 13+), we schedule daily local practice reminders on your device at approximately 12:00 PM your local time. These reminders are generated entirely on your device and no notification content is transmitted to our servers. You can disable reminders at any time in your device’s Settings → Notifications → WordCards, or from within the app’s Settings screen.</li>
+        <li><em>Profile Photo.</em> If you choose to set a profile picture, the image you select (from your camera or photo library) is uploaded to and stored in Google Firebase Storage under a path linked to your user ID. The resulting download URL is stored in your Firestore user profile.</li>
     </ul>
+
+    <h3>Learning data we store on your behalf</h3>
+    <p><em>In Short: We store your vocabulary progress, test history, and conversation history in our cloud database so your learning data syncs across devices.</em></p>
+    <p>The following data is stored in Google Firestore under your user account:</p>
+    <ul>
+        <li><em>Known Words.</em> Words you mark as "known" within any word deck, stored to track your vocabulary progress.</li>
+        <li><em>Test History.</em> Each test question you attempt, including the question ID, source word ID, whether your answer was correct, time taken, and a timestamp.</li>
+        <li><em>Answered Questions.</em> A record of questions you have answered correctly, used to avoid repeating questions too soon.</li>
+        <li><em>Chat Sessions &amp; Messages.</em> Your AI chat history, including session metadata (title, timestamps) and up to 25 messages per session. Older messages are automatically deleted from our servers on a daily basis.</li>
+        <li><em>Custom Decks.</em> Word decks you create, including deck name, description, color, and the words you add to them.</li>
+    </ul>
+
+    <h3>Usage and quota data stored locally</h3>
+    <p>To enforce free-tier usage limits, we store the following counters locally on your device using your device’s secure local storage. This data is not transmitted to our servers:</p>
+    <ul>
+        <li>Number of voice chat sessions used (lifetime and monthly)</li>
+        <li>Number of test questions answered (daily counter)</li>
+        <li>Number of AI chat messages sent (daily and lifetime counters)</li>
+        <li>Number of custom decks created</li>
+    </ul>
+    <p>These counters reset automatically on a daily or monthly basis based on the applicable limit.</p>
+
     <p>This information is primarily needed to maintain the security and operation of our application(s), for troubleshooting, and for our internal analytics and reporting purposes.</p>
     <p>All personal information that you provide to us must be true, complete, and accurate, and you must notify us of any changes to such personal information.</p>
 
@@ -228,6 +252,9 @@
         <li>To request feedback. We may process your information when necessary to request feedback and to contact you about your use of our Services.</li>
         <li>To protect our Services. We may process your information as part of our efforts to keep our Services safe and secure, including fraud monitoring and prevention.</li>
         <li>To identify usage trends. We may process information about how you use our Services to better understand how they are being used so we can improve them.</li>
+        <li>To manage your subscription. We share your user ID with RevenueCat to verify your subscription entitlements ("WordCards Pro") and unlock premium features accordingly.</li>
+        <li>To send you practice reminders. With your permission, we schedule local notifications on your device to remind you to practice daily. These notifications are generated locally and do not involve any server-side processing of your data.</li>
+        <li>To diagnose crashes and errors. We use Firebase Crashlytics to automatically collect error reports, stack traces, and device diagnostics when the app crashes, in order to identify and fix bugs.</li>
         <li>To save or protect an individual's vital interest. We may process your information when necessary to save or protect an individual's vital interest, such as to prevent harm.</li>
     </ul>
 
@@ -275,44 +302,150 @@
     <ul>
         <li>AI Platforms</li>
         <li>Cloud Computing Services</li>
+        <li>Crash Reporting &amp; Performance Monitoring Services</li>
         <li>Data Analytics Services</li>
         <li>Data Storage Service Providers</li>
-        <li>Performance Monitoring Tools</li>
-        <li>User Account Registration & Authentication Services</li>
+        <li>Subscription &amp; In-App Purchase Management Services</li>
+        <li>User Account Registration &amp; Authentication Services</li>
         <li>Website Hosting Service Providers</li>
     </ul>
+
+    <p>The specific third-party service providers we currently use are listed below:</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Provider</th>
+                <th>Purpose</th>
+                <th>Data Shared</th>
+                <th>Privacy Policy</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Google Firebase</strong> (Firestore, Auth, Storage, Cloud Functions — europe-west1)</td>
+                <td>Database, authentication, file storage, secure backend proxy for AI requests</td>
+                <td>User profile, email, language preferences, learning data, profile photos, AI request payloads</td>
+                <td><a href="https://policies.google.com/privacy" target="_blank">Google Privacy Policy</a></td>
+            </tr>
+            <tr>
+                <td><strong>Firebase Crashlytics</strong> (Google)</td>
+                <td>Crash reporting and error monitoring to improve app stability</td>
+                <td>Error logs, stack traces, device model, OS version, app version, crash timestamps</td>
+                <td><a href="https://policies.google.com/privacy" target="_blank">Google Privacy Policy</a></td>
+            </tr>
+            <tr>
+                <td><strong>RevenueCat</strong></td>
+                <td>Subscription management and in-app purchase verification</td>
+                <td>User ID (Firebase Auth UID), subscription status, entitlement data, purchase history (delegated to Apple/Google)</td>
+                <td><a href="https://www.revenuecat.com/privacy" target="_blank">RevenueCat Privacy Policy</a></td>
+            </tr>
+            <tr>
+                <td><strong>Google Sign-In</strong></td>
+                <td>Social authentication</td>
+                <td>Google account email, display name, profile photo, OAuth tokens</td>
+                <td><a href="https://policies.google.com/privacy" target="_blank">Google Privacy Policy</a></td>
+            </tr>
+            <tr>
+                <td><strong>Sign in with Apple</strong></td>
+                <td>Social authentication</td>
+                <td>Apple ID email (or relay address), display name, authentication tokens</td>
+                <td><a href="https://www.apple.com/legal/privacy/" target="_blank">Apple Privacy Policy</a></td>
+            </tr>
+        </tbody>
+    </table>
+
     <p>We also may need to share your personal information in the following situations:</p>
     <ul>
         <li><strong>Business Transfers.</strong> We may share or transfer your information in connection with, or during negotiations of, any merger, sale of company assets, financing, or acquisition of all or a portion of our business to another company.</li>
     </ul>
 
     <h2 id="aiproducts">5. DO WE OFFER ARTIFICIAL INTELLIGENCE-BASED PRODUCTS?</h2>
-    <p><em>In Short: We offer products, features, or tools powered by artificial intelligence, machine learning, or similar technologies.</em></p>
+    <p><em>In Short: We offer products, features, or tools powered by artificial intelligence, machine learning, or similar technologies. We clearly identify each third-party AI provider we use and obtain your explicit consent before sharing your personal data with them, in accordance with Apple App Store Guideline 5.1.2(i).</em></p>
     <p>As part of our Services, we offer products, features, or tools powered by artificial intelligence, machine learning, or similar technologies (collectively, "AI Products"). These tools are designed to enhance your experience and provide you with innovative solutions. The terms in this Privacy Notice govern your use of the AI Products within our Services.</p>
-    <p><strong>Use of AI Technologies</strong><br>
-    We provide the AI Products through third-party service providers ("AI Service Providers"), including Wit.ai and Google Cloud AI. As outlined in this Privacy Notice, your input, output, and personal information will be shared with and processed by these AI Service Providers to enable your use of our AI Products for purposes outlined in "<a href="#legalbases">WHAT LEGAL BASES DO WE RELY ON TO PROCESS YOUR PERSONAL INFORMATION?</a>" You must not use the AI Products in any way that violates the terms or policies of any AI Service Provider.</p>
+
+    <p><strong>Third-Party AI Service Providers — Named Disclosure</strong><br>
+    In compliance with Apple App Store Review Guideline 5.1.2(i) (effective November 2025), we identify below each third-party AI provider that may receive your personal data, the specific AI feature it powers, and what data is transmitted:</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>AI Provider</th>
+                <th>Feature</th>
+                <th>Data Sent</th>
+                <th>Provider Privacy Policy</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Google (Vertex AI / Gemini)</strong><br>Models: gemini-2.5-flash-lite, gemini-live-2.5-flash-native-audio</td>
+                <td>AI Chat (text &amp; live voice), vocabulary explanation, translation, chat title generation</td>
+                <td>Chat message text, conversation history (up to 25 messages), selected vocabulary words, your language preference</td>
+                <td><a href="https://policies.google.com/privacy" target="_blank">Google Privacy Policy</a></td>
+            </tr>
+            <tr>
+                <td><strong>Google Cloud Text-to-Speech</strong></td>
+                <td>Voice synthesis — reads AI responses aloud during chat sessions</td>
+                <td>Text of AI-generated responses, language code, voice preferences</td>
+                <td><a href="https://policies.google.com/privacy" target="_blank">Google Privacy Policy</a></td>
+            </tr>
+            <tr>
+                <td><strong>Google Cloud Speech-to-Text</strong></td>
+                <td>Voice input — converts your spoken words to text in the push-to-talk chat feature</td>
+                <td>Base64-encoded audio recording (WAV, 16 kHz) captured only while you are actively pressing the push-to-talk button; language code</td>
+                <td><a href="https://policies.google.com/privacy" target="_blank">Google Privacy Policy</a></td>
+            </tr>
+            <tr>
+                <td><strong>Groq (Whisper Large v3 Turbo)</strong></td>
+                <td>High-accuracy speech-to-text for the voice chat feature</td>
+                <td>Base64-encoded audio recording (WAV) captured only while you are actively speaking; language code</td>
+                <td><a href="https://groq.com/privacy-policy/" target="_blank">Groq Privacy Policy</a></td>
+            </tr>
+            <tr>
+                <td><strong>Wit.ai (Meta Platforms, Inc.)</strong></td>
+                <td>Natural language understanding for voice-based word lookup</td>
+                <td>Base64-encoded audio (WAV) of your spoken query</td>
+                <td><a href="https://wit.ai/privacy" target="_blank">Wit.ai Privacy Policy</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p>All AI-related network calls are routed through our Firebase Cloud Functions (Google Cloud, europe-west1 region), which act as a secure proxy. Your device never communicates directly with third-party AI providers; instead, our backend authenticates and forwards only the minimum necessary data.</p>
+
     <p><strong>Our AI Products</strong><br>
     Our AI Products are designed for the following functions:</p>
     <ul>
-        <li>AI bots</li>
-        <li>AI translation</li>
-        <li>Natural language processing</li>
-        <li>Machine learning models</li>
-        <li>Text analysis</li>
+        <li>AI-powered conversational chat (text and live voice)</li>
+        <li>Multilingual translation (20+ languages)</li>
+        <li>Natural language understanding and processing</li>
+        <li>Speech recognition (voice-to-text input)</li>
+        <li>Text-to-speech synthesis (AI responses read aloud)</li>
+        <li>Vocabulary explanation and contextual learning</li>
     </ul>
+
+    <p><strong>Explicit Consent for AI Data Sharing (Apple Guideline 5.1.2(i))</strong><br>
+    Before you use any AI-powered feature for the first time, the app will present a clear in-app disclosure identifying the relevant AI provider and the data to be shared, and will ask for your explicit permission. You may grant or deny permission for each AI feature independently. If you deny permission, that feature will be unavailable, but all other app functionality will continue to work.</p>
+
     <p><strong>How We Process Your Data Using AI</strong><br>
-    All personal information processed using our AI Products is handled in line with our Privacy Notice and our agreement with third parties. This ensures high security and safeguards your personal information throughout the process, giving you peace of mind about your data's safety.</p>
-    <p><strong>How to Opt Out</strong><br>
-    We believe in giving you the power to decide how your data is used. To opt out, you can:</p>
+    All personal information processed using our AI Products is handled in line with this Privacy Notice and our data processing agreements with each third-party provider. Chat history stored in our Firestore database is automatically truncated to the most recent 25 messages per session on a daily basis. We do not use your personal data to train third-party AI models unless you have given explicit consent.</p>
+
+    <p><strong>How to Opt Out or Revoke Consent</strong><br>
+    You retain full control over which AI features process your data:</p>
     <ul>
-        <li>Contact us using the contact information provided</li>
-        <li>Users can opt out of providing data to our AI features by simply not using those specific features. For example, not using the AI Chat screen will prevent chat data from being processed, and not using the voice input feature will prevent audio data from being processed.</li>
+        <li><strong>Per-feature opt-out:</strong> You can disable any AI feature at any time from the app's Settings screen. Disabling a feature immediately stops your data from being sent to the corresponding AI provider.</li>
+        <li><strong>Voice features:</strong> Not using the AI Chat, Voice Chat, or voice input features will prevent any audio data from being captured or transmitted.</li>
+        <li><strong>Revoke consent:</strong> Contact us at <a href="mailto:wordcards.helpdesk@gmail.com">wordcards.helpdesk@gmail.com</a> to revoke all AI processing consent. We will delete your AI interaction data from our systems and instruct providers to do the same where contractually permitted.</li>
+        <li><strong>Full opt-out:</strong> You may delete your account entirely from within the app (Profile → Delete Account), which permanently deletes all your data from our servers.</li>
     </ul>
 
     <h2 id="sociallogins">6. HOW DO WE HANDLE YOUR SOCIAL LOGINS?</h2>
-    <p><em>In Short: If you choose to register or log in to our Services using a social media account, we may have access to certain information about you.</em></p>
-    <p>Our Services offer you the ability to register and log in using your third-party social media account details (like your Facebook or X logins). Where you choose to do this, we will receive certain profile information about you from your social media provider. The profile information we receive may vary depending on the social media provider concerned, but will often include your name, email address, friends list, and profile picture, as well as other information you choose to make public on such a social media platform.</p>
-    <p>We will use the information we receive only for the purposes that are described in this Privacy Notice or that are otherwise made clear to you on the relevant Services. Please note that we do not control, and are not responsible for, other uses of your personal information by your third-party social media provider. We recommend that you review their privacy notice to understand how they collect, use, and share your personal information, and how you can set your privacy preferences on their sites and apps.</p>
+    <p><em>In Short: We support Google Sign-In and Sign in with Apple. We receive only the profile information needed to create or authenticate your account.</em></p>
+    <p>WordCards supports the following social login providers:</p>
+    <ul>
+        <li><strong>Google Sign-In:</strong> We receive your Google account email address, display name, and profile photo URL. We do not receive your contacts, calendar, or any other Google account data. <a href="https://policies.google.com/privacy" target="_blank">Google Privacy Policy</a>.</li>
+        <li><strong>Sign in with Apple:</strong> We receive your Apple ID email address (or Apple's privacy relay address if you choose to hide your email) and your display name (if provided). <a href="https://www.apple.com/legal/privacy/" target="_blank">Apple Privacy Policy</a>.</li>
+    </ul>
+    <p>Upon social login, your Firebase Auth UID is also shared with RevenueCat solely to verify your subscription status. We do not receive or store your friends list, social graph, or any data beyond what is listed above.</p>
+    <p>We will use the information we receive only for the purposes described in this Privacy Notice. We do not control, and are not responsible for, other uses of your personal information by the social media provider. We recommend reviewing their privacy notices and adjusting your privacy settings directly with them.</p>
 
     <h2 id="intltransfers">7. IS YOUR INFORMATION TRANSFERRED INTERNATIONALLY?</h2>
     <p><em>In Short: We may transfer, store, and process your information in countries other than your own.</em></p>
