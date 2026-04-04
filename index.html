@@ -258,6 +258,42 @@
         .footer-copy { color: #aeaeb2; font-size: 0.78rem; }
         .footer-legal { color: #c7c7cc; font-size: 0.7rem; max-width: 480px; text-align: center; }
 
+        /* ── YOUTUBE SECTION ── */
+        .yt-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            padding: 52px 20px;
+            background: #fafafa;
+            border-top: 1px solid rgba(0,0,0,0.06);
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+        }
+        .yt-label {
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #86868b;
+            margin: 0;
+        }
+        .yt-logo-link {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 12px;
+            transition: background 0.2s;
+        }
+        .yt-logo-link:hover { background: rgba(255,0,0,0.06); }
+        .yt-logo { height: 32px; width: auto; }
+        .yt-sub {
+            font-size: 0.9rem;
+            color: #86868b;
+            margin: 0;
+            text-align: center;
+        }
+
         /* ── ANIMATIONS ── */
         .fu { opacity:0; transform:translateY(28px); transition:opacity 0.7s cubic-bezier(0.2,0.8,0.2,1), transform 0.7s cubic-bezier(0.2,0.8,0.2,1); }
         .fu.on { opacity:1; transform:none; }
@@ -355,6 +391,21 @@
     </div>
 </section>
 
+<!-- POWERED BY YOUTUBE -->
+<section class="yt-section fu">
+    <p class="yt-label">Video content powered by</p>
+    <a href="https://www.youtube.com" target="_blank" rel="noopener" class="yt-logo-link" aria-label="YouTube">
+        <svg class="yt-logo" viewBox="0 0 90 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- YouTube play button icon -->
+            <rect x="0" y="0" width="28" height="20" rx="4.5" fill="#FF0000"/>
+            <polygon points="11.5,6 11.5,14 19.5,10" fill="#fff"/>
+            <!-- YouTube wordmark -->
+            <text x="33" y="15" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="14" font-weight="700" fill="#282828" letter-spacing="-0.3">YouTube</text>
+        </svg>
+    </a>
+    <p class="yt-sub">Every word includes a real YouTube clip showing it in context</p>
+</section>
+
 <!-- SCREENSHOTS -->
 <section class="screens">
     <div class="section-eye fu">A glance inside</div>
@@ -394,6 +445,7 @@
         </div>
         <div class="footer-copy">&copy; 2026 WordCards. All rights reserved.</div>
         <div class="footer-legal">Apple and the Apple logo are trademarks of Apple Inc. App Store is a service mark of Apple Inc.</div>
+        <div class="footer-legal">Video content powered by <a href="https://www.youtube.com" target="_blank" rel="noopener" style="color:#c7c7cc;text-decoration:underline;">YouTube</a>. YouTube is a trademark of Google LLC.</div>
     </div>
 </footer>
 
