@@ -41,10 +41,22 @@
 
         html { scroll-behavior: smooth; }
 
+        html {
+            /* Single continuous notebook grid for the whole page — anchored on
+               <html> so iOS/mobile browsers paint it consistently across sections.
+               Sections that want the grid stay transparent; sections with their
+               own background cover it. */
+            background-color: #f7f8fa;
+            background-image:
+                linear-gradient(var(--grid) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+            background-size: 56px 56px, 56px 56px;
+            background-attachment: fixed;
+        }
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             color: var(--ink);
-            background: #fff;
+            background: transparent;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
@@ -53,11 +65,7 @@
         /* ───────── GLOBAL GRID NOTEBOOK BACKGROUND ───────── */
         .grid-bg {
             position: relative;
-            background-color: #f7f8fa;
-            background-image:
-                linear-gradient(var(--grid) 1px, transparent 1px),
-                linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-            background-size: 56px 56px, 56px 56px;
+            background: transparent;
         }
 
         .grid-bg-dense {
@@ -617,17 +625,9 @@
         /* ───────── SHOWCASE (App Store screenshots gallery) ───────── */
         .showcase {
             padding: 100px 0 120px;
-            background: var(--paper);
+            background: transparent;
             position: relative;
             overflow: hidden;
-        }
-        .showcase::before {
-            content: ''; position: absolute; inset: 0;
-            background-image:
-                linear-gradient(rgba(30,60,120,0.06) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(30,60,120,0.06) 1px, transparent 1px);
-            background-size: 52px 52px;
-            pointer-events: none;
         }
         .showcase .section-eye {
             position: relative;
@@ -891,9 +891,16 @@
         @media (max-width: 640px) {
             nav { padding: 0 16px; height: 56px; }
             .nav-hide { display: none; }
-            .hero { padding: calc(40px + var(--y-offset)) 14px 60px; min-height: auto; }
+            .hero {
+                padding: calc(40px + var(--y-offset)) 14px 60px;
+                min-height: 100vh;          /* always fill the screen on mobile */
+                min-height: 100svh;         /* better on iOS Safari with URL bar */
+                overflow: hidden;           /* clip notebook so it can't bleed into next section */
+            }
             /* Pen stays high on mobile — don't push it down with the rest */
             .pen-deco { top: clamp(40px, 8vw, 90px); }
+            /* Notebook a bit lower on mobile */
+            .notebook-deco { top: calc(clamp(120px, 22vw, 200px) + var(--y-offset)); }
             /* Pull tagline pill + apple badge tighter under the title on mobile */
             .hero h1 { margin-bottom: 4px; }
             .tagline-rotator { margin: -2px auto 14px; }
