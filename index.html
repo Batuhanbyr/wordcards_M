@@ -246,6 +246,45 @@
             z-index: -1;
             border-radius: 6px;
         }
+        .hero h1 .imlec-css {
+            position: absolute;
+            top: 12%;
+            height: 76%;
+            width: clamp(3px, 0.5vw, 5px);
+            background-color: #2c7be5;
+            border-radius: 4px;
+            pointer-events: none;
+            animation: cursorPulse 1.5s infinite;
+        }
+        .hero h1 .imlec-css::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            width: clamp(12px, 1.6vw, 18px);
+            aspect-ratio: 1;
+            background-color: #2c7be5;
+            border-radius: 50%;
+        }
+        @keyframes cursorPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        .hero h1 .left-imlec {
+            right: 100%;
+            margin-right: 2px;
+        }
+        .hero h1 .left-imlec::before {
+            top: 0;
+            transform: translate(-50%, -50%);
+        }
+        .hero h1 .right-imlec {
+            left: 100%;
+            margin-left: 2px;
+        }
+        .hero h1 .right-imlec::before {
+            bottom: 0;
+            transform: translate(-50%, 50%);
+        }
 
         /* Rotating tagline below the title — thinner, cycles through 5 lines
            Frosted-glass pill: blurs the arrow behind it so text stays crisp. */
@@ -983,7 +1022,11 @@
     <div class="hero-inner">
         <h1 class="fu d1">
             Learn<br>
-            <span class="hl">English</span><br>
+            <span class="hl">
+                <span class="imlec-css left-imlec"></span>
+                English
+                <span class="imlec-css right-imlec"></span>
+            </span><br>
             Words Fast
         </h1>
 
