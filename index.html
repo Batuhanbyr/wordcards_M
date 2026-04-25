@@ -896,7 +896,11 @@
                 min-height: 100vh;          /* always fill the screen on mobile */
                 min-height: 100svh;         /* better on iOS Safari with URL bar */
                 overflow: hidden;           /* clip notebook so it can't bleed into next section */
+                display: flex;
+                flex-direction: column;
+                justify-content: center;    /* vertically center title block in viewport */
             }
+            .hero-inner { width: 100%; }
             /* Pen stays high on mobile — don't push it down with the rest */
             .pen-deco { top: clamp(40px, 8vw, 90px); }
             /* Notebook a bit lower on mobile */
