@@ -3,367 +3,910 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WordCards – Learn English with AI</title>
-    <meta name="description" content="Master English vocabulary with AI conversations, video context, and smart flashcards.">
+    <title>WordCards – Learn English Words Fast</title>
+    <meta name="description" content="Master English vocabulary from A1 to C1 with AI conversations, TED-Ed videos, pronunciation, and smart flashcards. Featured in Apple Apps We Love.">
     <link rel="icon" type="image/jpeg" href="icon.jpeg">
     <link rel="apple-touch-icon" href="icon.jpeg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         :root {
-            --bg: #f0f6ff;
-            --bg2: #ffffff;
-            --text: #1c1c1e;
-            --text2: #3a3a3c;
-            --muted: #8e8e93;
-            --purple: #42a5f5;
-            --purple2: #1e88e5;
-            --blue: #90caf9;
-            --glass-bg: rgba(255,255,255,0.72);
-            --glass-border: rgba(255,255,255,0.9);
-            --shadow-sm: 0 2px 16px rgba(66,165,245,0.1);
-            --shadow-md: 0 8px 40px rgba(66,165,245,0.15);
-            --shadow-lg: 0 24px 80px rgba(0,0,0,0.12);
+            --ink: #1a1a1a;
+            --ink2: #2f2f2f;
+            --muted: #6b6b6b;
+            --paper: #f6f7f9;
+            --grid: rgba(30,60,120,0.08);
+            --blue: #3c9df5;
+            --blue-dark: #1e88e5;
+            --blue-deep: #1565c0;
+            --pink: #ff8bb3;
+            --pink-deep: #e05c8a;
+            --mint: #86e7c6;
+            --green: #6ed09a;
+            --green-deep: #2e8b57;
+            --yellow: #ffd76b;
+            --yellow-deep: #f2a83a;
+            --orange: #ffa559;
+            --orange-deep: #f2803a;
+            --purple: #8a7af0;
+            --purple-deep: #6a5ad8;
+            --red-highlight: #ef4444;
+            --shadow-sm: 0 2px 14px rgba(12,30,80,0.08);
+            --shadow-md: 0 18px 50px rgba(12,30,80,0.14);
+            --shadow-lg: 0 30px 90px rgba(12,30,80,0.22);
         }
 
         html { scroll-behavior: smooth; }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
-            background: var(--bg);
-            color: var(--text);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            color: var(--ink);
+            background: #fff;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* ── NAV ── */
+        /* ───────── GLOBAL GRID NOTEBOOK BACKGROUND ───────── */
+        .grid-bg {
+            position: relative;
+            background-color: #f7f8fa;
+            background-image:
+                linear-gradient(var(--grid) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+            background-size: 56px 56px, 56px 56px;
+        }
+
+        .grid-bg-dense {
+            background-image:
+                linear-gradient(rgba(255,255,255,0.18) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.18) 1px, transparent 1px);
+            background-size: 44px 44px, 44px 44px;
+        }
+
+        /* ───────── NAV ───────── */
         nav {
             position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-            height: 52px;
+            height: 60px;
             display: flex; align-items: center; justify-content: space-between;
-            padding: 0 24px;
-            background: rgba(240,246,255,0.8);
-            backdrop-filter: saturate(180%) blur(24px);
-            -webkit-backdrop-filter: saturate(180%) blur(24px);
-            border-bottom: 1px solid rgba(0,0,0,0.08);
+            padding: 0 28px;
+            background: rgba(247,248,250,0.75);
+            backdrop-filter: saturate(180%) blur(22px);
+            -webkit-backdrop-filter: saturate(180%) blur(22px);
+            border-bottom: 1px solid rgba(0,0,0,0.06);
         }
         .nav-logo {
-            display: flex; align-items: center; gap: 8px;
-            font-size: 1rem; font-weight: 700; color: var(--text);
+            display: flex; align-items: center; gap: 10px;
+            font-size: 1.05rem; font-weight: 800; color: var(--ink);
             text-decoration: none; letter-spacing: -0.02em;
         }
-        .nav-logo img { width: 26px; height: 26px; border-radius: 7px; box-shadow: var(--shadow-sm); }
-        .nav-links { display: flex; gap: 4px; align-items: center; }
+        .nav-logo img { width: 30px; height: 30px; border-radius: 8px; box-shadow: var(--shadow-sm); }
+        .nav-links { display: flex; gap: 6px; align-items: center; }
         .nav-links a {
-            color: var(--muted); font-size: 0.875rem; font-weight: 500;
-            text-decoration: none; padding: 5px 12px; border-radius: 20px;
-            transition: all 0.2s;
+            color: var(--ink2); font-size: 0.9rem; font-weight: 600;
+            text-decoration: none; padding: 8px 14px; border-radius: 10px;
+            transition: background 0.2s, color 0.2s;
         }
-        .nav-links a:hover { color: var(--text); background: rgba(0,0,0,0.05); }
+        .nav-links a:hover { background: rgba(0,0,0,0.05); }
         .nav-btn {
-            background: #42a5f5 !important;
-            color: white !important; font-weight: 600 !important;
-            box-shadow: 0 2px 12px rgba(66,165,245,0.4) !important;
+            background: var(--ink) !important;
+            color: #fff !important; font-weight: 700 !important;
+            padding: 9px 18px !important;
+            border-radius: 10px !important;
         }
-        .nav-btn:hover { background: #1e88e5 !important; transform: translateY(-1px); box-shadow: 0 4px 20px rgba(66,165,245,0.5) !important; }
+        .nav-btn:hover { background: var(--blue-deep) !important; }
 
-        /* ── HERO ── */
+        /* ───────── HERO (image 1 style) ───────── */
         .hero {
+            --y-offset: 0px;
+            position: relative;
             min-height: 100vh;
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
+            padding: calc(120px + var(--y-offset)) 24px 80px;
+            overflow: hidden;
+        }
+        .hero-inner {
+            max-width: 1200px; margin: 0 auto;
+            position: relative;
+            display: flex; flex-direction: column; align-items: center;
             text-align: center;
-            padding: 100px 24px 80px;
-            position: relative; overflow: hidden;
         }
-        .hero::before {
-            content: '';
-            position: absolute; inset: 0; z-index: 0;
-            background:
-                radial-gradient(ellipse 80% 50% at 20% 30%, rgba(144,202,249,0.35) 0%, transparent 55%),
-                radial-gradient(ellipse 60% 40% at 80% 70%, rgba(66,165,245,0.2) 0%, transparent 55%),
-                radial-gradient(ellipse 50% 50% at 50% 0%, rgba(255,255,255,0.95) 0%, transparent 70%);
-        }
-        .hero > * { position: relative; z-index: 1; }
 
-        .hero-badge {
-            display: inline-flex; align-items: center; gap: 7px;
-            background: rgba(144,202,249,0.25);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(144,202,249,0.6);
-            box-shadow: 0 2px 16px rgba(144,202,249,0.2);
-            color: #1565c0;
-            font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
-            padding: 6px 16px; border-radius: 100px;
-            margin-bottom: 28px;
+        /* Notebook — high up, slides outward on scroll */
+        .notebook-deco {
+            position: absolute;
+            left: clamp(-40px, -2.85vw, -17px);
+            top: calc(clamp(67px, 11.4vw, 160px) + var(--y-offset));
+            width: clamp(118px, 20vw, 280px);
+            pointer-events: none; z-index: 1;
+            transform: translate3d(0, 0, 0) rotate(0deg);
+            will-change: transform;
+            transition: transform 0.08s linear;
         }
-        .badge-dot { width: 6px; height: 6px; background: #42a5f5; border-radius: 50%; animation: breathe 2.4s ease-in-out infinite; }
-        @keyframes breathe { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(0.7)} }
+        .notebook-deco img { width: 100%; display: block; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.18)); }
+
+        /* Pen — laid diagonally at 45°, high up on the right */
+        .pen-deco {
+            position: absolute;
+            right: clamp(-60px, -4.3vw, -25px);
+            top: calc(clamp(59px, 10vw, 140px) + var(--y-offset));
+            width: clamp(118px, 20vw, 280px);
+            pointer-events: none; z-index: 1;
+            transform-origin: center center;
+            transform: translate3d(0, 0, 0) rotate(-45deg);
+            will-change: transform;
+            transition: transform 0.08s linear;
+        }
+        .pen-deco img { width: 100%; display: block; filter: drop-shadow(0 14px 28px rgba(0,0,0,0.28)); }
+
+        /* Scattered background cards (A2, B1, B2, PV) around the title */
+        .scatter-wrap {
+            position: absolute;
+            z-index: 1;
+            opacity: 0;
+            pointer-events: none;
+            animation: scatterFade 1.1s cubic-bezier(0.2,0.8,0.2,1) forwards;
+        }
+        .scatter-wrap img {
+            width: 150px; display: block;
+            filter: drop-shadow(0 18px 32px rgba(20,40,100,0.22));
+        }
+        /* Crescent arc around the title "Learn English Words Fast"
+           FLUID SCALING — every position & size scales with the viewport
+           using the same ratio as the title's font (clamp(3rem, 8.2vw, 7.2rem)).
+           Card scale factor: 0.42 (small phones) → 1.0 (desktop). */
+        .s-a2 { top: calc(clamp(105px, 17.8vw, 250px) + var(--y-offset));  left: calc(50% - clamp(181px, 30.6vw, 430px)); animation-delay: 0.3s; }
+        .s-b1 { top: calc(clamp(38px,  6.4vw,  90px)  + var(--y-offset));  left: calc(50% + clamp(71px,  12.1vw, 170px)); animation-delay: 0.5s; }
+        .s-b2 { top: calc(clamp(168px, 28.5vw, 400px) + var(--y-offset));  left: calc(50% - clamp(143px, 24.2vw, 340px)); animation-delay: 0.7s; }
+        .s-pv { top: calc(clamp(88px,  14.95vw, 210px) + var(--y-offset)); left: calc(50% + clamp(97px,  16.4vw, 230px)); animation-delay: 0.9s; }
+        .scatter-wrap img { width: clamp(63px, 10.7vw, 150px); }
+        .s-a2 img { transform: rotate(-16deg); }
+        .s-b1 img { transform: rotate(14deg); }
+        .s-b2 img { transform: rotate(-7deg); width: clamp(59px, 10vw, 140px); }
+        .s-pv img { transform: rotate(20deg); width: clamp(59px, 10vw, 140px); }
+
+        @keyframes scatterFade {
+            0%   { opacity: 0; transform: translateY(-40px) scale(0.88); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* A1 & C1 drop-in from top after scatter cards appear */
+        .fcard-wrap.a1 {
+            opacity: 0;
+            animation: dropInA1 1.4s cubic-bezier(0.34, 1.2, 0.5, 1) 1.1s forwards;
+        }
+        .fcard-wrap.c1 {
+            opacity: 0;
+            animation: dropInC1 1.4s cubic-bezier(0.34, 1.2, 0.5, 1) 1.4s forwards;
+        }
+        @keyframes dropInA1 {
+            0%   { opacity: 0; transform: translateY(-420px) rotate(-25deg); }
+            60%  { opacity: 1; }
+            100% { opacity: 1; transform: translateY(0) rotate(-10deg); }
+        }
+        @keyframes dropInC1 {
+            0%   { opacity: 0; transform: translateY(-420px) rotate(28deg); }
+            60%  { opacity: 1; }
+            100% { opacity: 1; transform: translateY(0) rotate(11deg); }
+        }
+
+        /* Arrow — fog reveal, delayed until both cards have landed */
+        .arrow-curve {
+            opacity: 0;
+            filter: blur(14px);
+            animation: fogReveal 1.5s ease 2.7s forwards;
+        }
+        @keyframes fogReveal {
+            0%   { opacity: 0; filter: blur(14px); transform: scale(1.15); }
+            60%  { opacity: 0.7; filter: blur(5px); }
+            100% { opacity: 1; filter: blur(0); transform: scale(1); }
+        }
+
+        .brand-row {
+            display: inline-flex; align-items: center; gap: 10px;
+            margin-bottom: 24px;
+            z-index: 2;
+        }
+        .brand-row .logo-img { width: 38px; height: 38px; border-radius: 10px; box-shadow: var(--shadow-sm); }
+        .brand-row .brand-name {
+            font-size: 1.7rem; font-weight: 800;
+            letter-spacing: -0.03em; color: var(--ink);
+        }
+        .brand-row .brand-dot { color: var(--blue); }
 
         .hero h1 {
-            font-size: clamp(2.6rem, 5.5vw, 5rem);
-            font-weight: 800; letter-spacing: -0.04em; line-height: 1.02;
-            color: var(--text);
-            margin-bottom: 20px; max-width: 860px;
+            font-size: clamp(3rem, 8.2vw, 7.2rem);
+            font-weight: 900; line-height: 0.98; letter-spacing: -0.045em;
+            color: var(--ink);
+            max-width: 1000px;
+            z-index: 2;
+            margin-bottom: 36px;
         }
-        .hero h1 em {
-            font-style: normal;
-            background: linear-gradient(135deg, #1e88e5 0%, #90caf9 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        .hero h1 .hl {
+            position: relative;
+            display: inline-block;
+            padding: 0 8px;
+            z-index: 1;
         }
-        .hero-sub {
-            font-size: clamp(1rem, 1.8vw, 1.2rem);
-            color: var(--muted); max-width: 520px;
-            line-height: 1.7; margin-bottom: 44px;
+        .hero h1 .hl::before {
+            content: '';
+            position: absolute;
+            inset: 12% -4px 12% -4px;
+            background: rgba(144,202,249,0.55);
+            z-index: -1;
+            border-radius: 6px;
         }
-        .hero-cta { display: flex; gap: 12px; align-items: center; justify-content: center; flex-wrap: wrap; margin-bottom: 72px; }
+
+        /* Rotating tagline below the title — thinner, cycles through 5 lines
+           Frosted-glass pill: blurs the arrow behind it so text stays crisp. */
+        .tagline-rotator {
+            display: inline-grid;
+            grid-template-areas: "stack";
+            width: max-content;
+            max-width: 100%;
+            margin: 16px auto 28px;
+            z-index: 3;
+            position: relative;
+            text-align: center;
+            padding: 14px 28px;
+            background: rgba(255, 255, 255, 0.78);
+            backdrop-filter: blur(16px) saturate(160%);
+            -webkit-backdrop-filter: blur(16px) saturate(160%);
+            border-radius: 22px;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            box-shadow: 0 10px 28px rgba(20, 40, 100, 0.12);
+        }
+        .tagline {
+            grid-area: stack;
+            font-size: clamp(0.7rem, 1.3vw, 1.05rem);
+            font-weight: 500;
+            line-height: 1.35;
+            letter-spacing: -0.01em;
+            color: var(--ink);
+            opacity: 0;
+            transform: translateY(14px);
+            transition: opacity 0.55s ease, transform 0.55s ease, filter 0.55s ease;
+            filter: blur(6px);
+            pointer-events: none;
+            white-space: nowrap;
+        }
+        .tagline.active {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+            pointer-events: auto;
+        }
+        .tagline.leaving {
+            opacity: 0;
+            transform: translateY(-14px);
+            filter: blur(6px);
+        }
+        .tagline .ted-accent {
+            color: var(--red-highlight);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        /* Apple "Apps We Love" — plain text with laurel wings */
+        .apple-badge {
+            display: inline-flex; align-items: center; gap: 14px;
+            color: var(--ink);
+            font-size: 1.15rem; font-weight: 800;
+            letter-spacing: -0.015em;
+            z-index: 2;
+            margin-bottom: 12px;
+        }
+        .apple-badge .wreath-img { height: 56px; width: auto; display: block; }
+        .apple-badge .apple-logo { display: inline-flex; }
+        .apple-badge .text-row {
+            display: inline-flex; align-items: center; gap: 8px;
+        }
+
+        /* Flashcards (A1 / C1) — placed as scatter cards around the title
+           FLUID SCALING — same ratio as title font (0.42x → 1x) */
+        .fcard-wrap {
+            position: absolute;
+            width: clamp(76px, 12.8vw, 180px);
+            z-index: 1;
+            pointer-events: none;
+        }
+        /* A1 — topmost card on the LEFT side (anchors the upper-left of the arc) */
+        .fcard-wrap.a1 {
+            top: calc(clamp(34px, 5.7vw, 80px) + var(--y-offset));
+            left: calc(50% - clamp(160px, 27vw, 380px));
+            transform: rotate(-10deg);
+        }
+        /* C1 — bottommost card on the RIGHT side (anchors the lower-right of the arc) */
+        .fcard-wrap.c1 {
+            top: calc(clamp(143px, 24.2vw, 340px) + var(--y-offset));
+            left: calc(50% + clamp(107px, 18.2vw, 255px));
+            transform: rotate(11deg);
+        }
+        .fcard-wrap img {
+            width: 100%; display: block;
+            filter: drop-shadow(0 22px 40px rgba(20,40,100,0.22));
+        }
+        .cardtag {
+            position: absolute;
+            background: #fff; border-radius: 100px;
+            padding: clamp(3px, 0.5vw, 7px) clamp(8px, 1vw, 14px);
+            font-weight: 800;
+            font-size: clamp(0.55rem, 0.85vw, 0.82rem);
+            box-shadow: 0 10px 24px rgba(0,0,0,0.15);
+            z-index: 1;
+            white-space: nowrap;
+        }
+        /* Beginner pill sits on the top-right of the A1 card */
+        .fcard-wrap.a1 .cardtag { top: clamp(9px, 1.55vw, 22px); right: clamp(-16px, -1.15vw, -7px); color: var(--ink); }
+        /* Advanced pill sits on the top-right of the C1 card */
+        .fcard-wrap.c1 .cardtag { top: clamp(9px, 1.55vw, 22px); right: clamp(-16px, -1.15vw, -7px); color: var(--green-deep); }
+
+        /* Arrow — sits behind the title, connecting A1 (top-left) to C1 (bottom-right) */
+        .arrow-curve {
+            position: absolute;
+            top: calc(clamp(101px, 17.1vw, 240px) + var(--y-offset));
+            left: calc(50% - clamp(118px, 20vw, 280px));
+            width: clamp(269px, 45.7vw, 640px);
+            height: clamp(151px, 25.7vw, 360px);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* CTA buttons */
+        .hero-cta {
+            display: flex; gap: 12px; align-items: center; justify-content: center; flex-wrap: wrap;
+            z-index: 3; margin-top: 12px;
+        }
         .btn-primary {
-            display: inline-flex; align-items: center; gap: 9px;
-            background: linear-gradient(135deg, #42a5f5, #1e88e5);
-            color: white; font-weight: 700; font-size: 0.95rem;
-            padding: 13px 26px; border-radius: 14px;
-            text-decoration: none; transition: all 0.25s;
-            box-shadow: 0 4px 24px rgba(66,165,245,0.45);
+            display: inline-flex; align-items: center; gap: 10px;
+            background: var(--ink);
+            color: #fff; font-weight: 700; font-size: 1rem;
+            padding: 15px 28px; border-radius: 14px;
+            text-decoration: none; transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.22);
             letter-spacing: -0.01em;
         }
-        .btn-primary:hover { background: linear-gradient(135deg, #1e88e5, #1565c0); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(66,165,245,0.55); }
+        .btn-primary:hover { transform: translateY(-2px); background: var(--blue-deep); box-shadow: 0 16px 38px rgba(30,136,229,0.38); }
+
         .btn-ghost {
             display: inline-flex; align-items: center; gap: 8px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(0,0,0,0.1);
-            color: var(--text2); font-size: 0.95rem; font-weight: 500;
-            padding: 13px 22px; border-radius: 14px;
-            text-decoration: none; transition: all 0.2s;
+            background: #fff;
+            border: 1.5px solid rgba(0,0,0,0.1);
+            color: var(--ink); font-size: 1rem; font-weight: 600;
+            padding: 13.5px 24px; border-radius: 14px;
+            text-decoration: none; transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
             box-shadow: var(--shadow-sm);
         }
-        .btn-ghost:hover { background: rgba(255,255,255,0.95); transform: translateY(-1px); }
+        .btn-ghost:hover { transform: translateY(-2px); border-color: var(--blue); box-shadow: 0 10px 28px rgba(30,136,229,0.22); }
 
-        /* phones */
-        .phones-row { display: flex; align-items: flex-end; justify-content: center; gap: 16px; }
-        .phone {
-            border-radius: 38px; overflow: hidden;
-            border: 6px solid rgba(255,255,255,0.95);
-            box-shadow: var(--shadow-lg);
+        /* ───────── COLOR PANELS (feature sections image 2-8 style) ───────── */
+        .panel {
+            position: relative;
+            padding: 100px 24px;
+            overflow: hidden;
         }
-        .phone img { display: block; width: 100%; height: 100%; object-fit: cover; }
-        .phone-main { width: 215px; height: 464px; }
-        .phone-side { width: 175px; height: 378px; opacity: 0.8; transform: translateY(28px); }
-        @media(max-width:640px) { .phone-side { display:none; } .phone-main { width:195px; height:421px; } }
-
-        /* ── FEATURES ── */
-        .features { padding: 130px 24px; }
-        .section-eye {
-            text-align: center;
-            font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em;
-            text-transform: uppercase; color: #1e88e5;
-            margin-bottom: 14px;
+        .panel-inner {
+            max-width: 1200px; margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 60px; align-items: center;
         }
-        .section-h { text-align: center; font-size: clamp(1.9rem, 3.5vw, 2.8rem); font-weight: 800; letter-spacing: -0.035em; color: var(--text); margin-bottom: 56px; max-width: 680px; margin-left: auto; margin-right: auto; }
+        .panel-inner.reverse { grid-template-columns: 1fr 1.1fr; }
+        .panel-inner.reverse .panel-text { order: 2; }
 
-        .grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; max-width: 1060px; margin: 0 auto; }
-
-        .card {
-            background: var(--glass-bg);
-            backdrop-filter: saturate(200%) blur(20px);
-            -webkit-backdrop-filter: saturate(200%) blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 22px; padding: 32px 28px;
-            box-shadow: var(--shadow-sm);
-            transition: all 0.3s cubic-bezier(0.2,0.8,0.2,1);
-            position: relative; overflow: hidden;
+        .panel-text h2 {
+            font-size: clamp(2.2rem, 4.8vw, 3.8rem);
+            font-weight: 900; line-height: 1;
+            letter-spacing: -0.045em;
+            color: var(--ink);
+            margin-bottom: 22px;
         }
-        .card::after {
-            content:''; position:absolute; top:0; left:0; right:0; height:1px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+        .panel-text p {
+            font-size: 1.1rem; line-height: 1.65;
+            color: var(--ink2);
+            max-width: 480px;
+            margin-bottom: 26px;
+            font-weight: 500;
         }
-        .card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: rgba(144,202,249,0.6); }
-        .card.wide { grid-column: span 2; }
-        .card.full { grid-column: span 3; }
-
-        .icon-pill {
-            display: inline-flex; align-items: center; justify-content: center;
-            width: 48px; height: 48px; border-radius: 14px;
+        .panel-text .tag {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 6px 14px; border-radius: 100px;
+            background: rgba(255,255,255,0.7);
+            border: 1.5px solid rgba(0,0,0,0.08);
+            font-size: 0.78rem; font-weight: 700; letter-spacing: 0.05em;
+            text-transform: uppercase;
             margin-bottom: 18px;
         }
-        .ip-purple { background: rgba(144,202,249,0.3); }
-        .ip-blue   { background: rgba(66,165,245,0.15); }
-        .ip-pink   { background: rgba(240,98,146,0.12); }
-        .ip-green  { background: rgba(102,187,106,0.15); }
-        .ip-orange { background: rgba(255,183,77,0.15); }
 
-        .card h3 { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin-bottom: 9px; }
-        .card p { font-size: 0.92rem; line-height: 1.65; color: var(--muted); }
-
-        /* ── SCREENSHOTS ── */
-        .screens { padding: 100px 0 130px; }
-        .screens .section-eye, .screens .section-h { margin-bottom: 44px; }
-        .screens-scroll {
-            display: flex; gap: 20px; justify-content: center;
-            overflow-x: auto; padding: 16px 40px 32px;
-            scroll-snap-type: x mandatory; scrollbar-width: none;
-        }
-        .screens-scroll::-webkit-scrollbar { display: none; }
-        .screen-card {
-            flex-shrink: 0; scroll-snap-align: center;
-            width: 190px; height: 410px; border-radius: 30px; overflow: hidden;
-            border: 5px solid rgba(255,255,255,0.95);
-            box-shadow: var(--shadow-md);
-            transition: transform 0.3s;
-        }
-        .screen-card:hover { transform: scale(1.04) translateY(-4px); }
-        .screen-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
-        .screens-hint { text-align: center; color: var(--muted); font-size: 0.82rem; margin-top: 4px; }
-
-        /* ── CTA ── */
-        .cta-wrap { padding: 100px 24px 120px; }
-        .cta-card {
-            max-width: 860px; margin: 0 auto;
-            background: linear-gradient(140deg, #90caf9 0%, #42a5f5 50%, #1e88e5 100%);
-            border-radius: 32px; padding: 72px 48px; text-align: center;
-            position: relative; overflow: hidden;
-            box-shadow: 0 20px 60px rgba(66,165,245,0.4);
-        }
-        .cta-card::before {
-            content:''; position:absolute;
-            width:500px; height:500px; border-radius:50%;
-            background: rgba(255,255,255,0.07);
-            top:-150px; right:-100px; pointer-events:none;
-        }
-        .cta-card::after {
-            content:''; position:absolute;
-            width:300px; height:300px; border-radius:50%;
-            background: rgba(255,255,255,0.05);
-            bottom:-80px; left:-60px; pointer-events:none;
-        }
-        .cta-card h2 { font-size: clamp(1.7rem,3.5vw,2.6rem); font-weight: 800; letter-spacing: -0.035em; color: white; margin-bottom: 14px; }
-        .cta-card p { color: rgba(255,255,255,0.78); font-size: 1.05rem; line-height: 1.7; margin-bottom: 40px; max-width: 480px; margin-left:auto; margin-right:auto; }
-        .btn-white {
-            display: inline-flex; align-items: center; gap: 9px;
-            background: white; color: #1565c0;
-            font-weight: 700; font-size: 0.95rem;
-            padding: 13px 26px; border-radius: 14px;
-            text-decoration: none; transition: all 0.25s;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-        }
-        .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
-
-        /* ── FOOTER ── */
-        footer { border-top: 1px solid rgba(0,0,0,0.07); padding: 44px 24px; background: var(--bg); }
-        .footer-in { display: flex; flex-direction: column; align-items: center; gap: 18px; }
-        .footer-logo { display: flex; align-items: center; gap: 8px; font-size: 0.95rem; font-weight: 700; color: var(--text); }
-        .footer-logo img { width: 22px; height: 22px; border-radius: 6px; }
-        .footer-links { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
-        .footer-links a { color: var(--muted); font-size: 0.875rem; text-decoration: none; transition: color 0.2s; }
-        .footer-links a:hover { color: var(--text); }
-        .footer-copy { color: #aeaeb2; font-size: 0.78rem; }
-        .footer-legal { color: #c7c7cc; font-size: 0.7rem; max-width: 480px; text-align: center; }
-
-        /* ── SOCIAL ── */
-        .social-links { display: flex; gap: 14px; align-items: center; justify-content: center; }
-        .social-btn {
-            display: inline-flex; align-items: center; justify-content: center;
-            width: 40px; height: 40px; border-radius: 12px;
-            text-decoration: none; transition: all 0.22s;
-            border: 1px solid rgba(0,0,0,0.09);
-            background: rgba(255,255,255,0.7);
-        }
-        .social-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.12); background: #fff; }
-        .social-btn.ig:hover { border-color: #e1306c; box-shadow: 0 6px 20px rgba(225,48,108,0.25); }
-        .social-btn.tt:hover { border-color: #010101; box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
-        .social-btn.yt:hover { border-color: #ff0000; box-shadow: 0 6px 20px rgba(255,0,0,0.22); }
-
-        /* ── SOCIAL SECTION ── */
-        .social-section {
-            padding: 64px 24px;
-            background: var(--bg2);
-            text-align: center;
-            border-top: 1px solid rgba(0,0,0,0.06);
-            border-bottom: 1px solid rgba(0,0,0,0.06);
-        }
-        .social-section .section-eye { margin-bottom: 10px; }
-        .social-section h2 { font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 800; letter-spacing: -0.03em; color: var(--text); margin-bottom: 10px; }
-        .social-section p { color: var(--muted); font-size: 0.95rem; margin-bottom: 32px; }
-        .social-pills { display: flex; gap: 14px; align-items: center; justify-content: center; flex-wrap: wrap; }
-        .social-pill {
-            display: inline-flex; align-items: center; gap: 10px;
-            padding: 11px 22px; border-radius: 100px;
-            text-decoration: none; font-size: 0.92rem; font-weight: 600;
-            transition: all 0.22s; border: 1.5px solid transparent;
-        }
-        .social-pill.ig {
-            background: linear-gradient(135deg, rgba(225,48,108,0.08), rgba(255,150,50,0.08));
-            border-color: rgba(225,48,108,0.2); color: #c2185b;
-        }
-        .social-pill.ig:hover { background: linear-gradient(135deg, #e1306c, #fd1d1d, #fcb045); color: #fff; border-color: transparent; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(225,48,108,0.35); }
-        .social-pill.tt {
-            background: rgba(0,0,0,0.04);
-            border-color: rgba(0,0,0,0.12); color: #010101;
-        }
-        .social-pill.tt:hover { background: #010101; color: #fff; border-color: transparent; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.25); }
-        .social-pill.yt {
-            background: rgba(255,0,0,0.06);
-            border-color: rgba(255,0,0,0.2); color: #c62828;
-        }
-        .social-pill.yt:hover { background: #ff0000; color: #fff; border-color: transparent; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,0,0,0.35); }
-
-        /* ── YOUTUBE INLINE ── */
-        .yt-inline {
-            display: inline-flex;
-            align-items: center;
-            vertical-align: middle;
-            margin: 0 2px;
+        .panel-text h2 .circled {
             position: relative;
-            top: -1px;
+            display: inline-block;
+            padding: 2px 14px;
         }
-        .yt-inline svg { height: 18px; width: auto; }
+        .panel-text h2 .circled::before {
+            content: '';
+            position: absolute;
+            inset: -6px -8px;
+            border: 3.5px solid var(--red-highlight);
+            border-radius: 50%;
+            transform: rotate(-3deg);
+        }
 
-        /* ── YOUTUBE SECTION ── */
-        .yt-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-            padding: 52px 20px;
-            background: #fafafa;
-            border-top: 1px solid rgba(0,0,0,0.06);
-            border-bottom: 1px solid rgba(0,0,0,0.06);
+        /* Phone frame */
+        .phone-frame {
+            position: relative;
+            width: 100%; max-width: 320px;
+            aspect-ratio: 9/19;
+            margin: 0 auto;
+            border-radius: 44px;
+            overflow: hidden;
+            background: #000;
+            padding: 6px;
+            box-shadow: var(--shadow-lg);
         }
-        .yt-label {
-            font-size: 0.78rem;
-            font-weight: 600;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: #86868b;
-            margin: 0;
+        .phone-frame img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            border-radius: 38px;
+            display: block;
         }
-        .yt-logo-link {
-            display: inline-flex;
-            align-items: center;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 12px;
-            transition: background 0.2s;
+
+        /* Panel color variants */
+        .panel-blue { background: linear-gradient(180deg, #cfe9ff 0%, #a2d4ff 100%); }
+        .panel-pink { background: linear-gradient(180deg, #ffc9db 0%, #ff9db9 100%); }
+        .panel-mint { background: linear-gradient(180deg, #c9f5e4 0%, #8eead1 100%); }
+        .panel-yellow { background: linear-gradient(180deg, #fff0b8 0%, #ffdf86 100%); }
+        .panel-orange { background: linear-gradient(180deg, #ffd7a8 0%, #ffae6a 100%); }
+        .panel-purple { background: linear-gradient(180deg, #d7d1ff 0%, #a99bef 100%); }
+
+        /* Decorative elements (absolute floating bits) */
+        .deco {
+            position: absolute;
+            pointer-events: none;
+            filter: drop-shadow(0 10px 24px rgba(0,0,0,0.2));
         }
-        .yt-logo-link:hover { background: rgba(255,0,0,0.06); }
-        .yt-logo { height: 32px; width: auto; }
-        .yt-sub {
-            font-size: 0.9rem;
-            color: #86868b;
-            margin: 0;
+        .star-deco {
+            width: 68px; height: 68px;
+        }
+        .star-deco svg { width: 100%; height: 100%; }
+
+        /* ───────── LEVELS SECTION (image 9 style) ───────── */
+        .levels-section {
+            position: relative;
+            padding: 110px 24px 140px;
+            background: linear-gradient(180deg, #9fe6c8 0%, #6bc5ee 45%, #4a8cd8 100%);
+            overflow: hidden;
+        }
+        .levels-section::before {
+            content: ''; position: absolute; inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px);
+            background-size: 48px 48px;
+            pointer-events: none;
+        }
+        .levels-section h2 {
+            position: relative;
             text-align: center;
+            font-size: clamp(2.4rem, 5.2vw, 4rem);
+            font-weight: 900;
+            letter-spacing: -0.045em;
+            color: var(--ink);
+            margin-bottom: 60px;
+            line-height: 1;
+        }
+        .levels-wrap {
+            position: relative; max-width: 1040px; margin: 0 auto;
+        }
+        .levels-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 36px 24px;
+            position: relative;
+            z-index: 2;
+            justify-items: center;
+        }
+        .levels-wrap svg.path-line { display: none; }
+        .big-card {
+            width: 100%; max-width: 240px;
+            display: block;
+            filter: drop-shadow(0 22px 40px rgba(20,40,100,0.22));
+            transition: transform 0.35s ease;
+        }
+        .big-card:hover { transform: translateY(-8px); }
+
+        /* ───────── REVIEWS SECTION (image 10) ───────── */
+        .reviews {
+            position: relative;
+            padding: 110px 24px 140px;
+            background: linear-gradient(180deg, #c4e8ff 0%, #9cd4fb 100%);
+            overflow: hidden;
+        }
+        .reviews::before {
+            content: ''; position: absolute; inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.2) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.2) 1px, transparent 1px);
+            background-size: 48px 48px;
+            pointer-events: none;
+        }
+        .reviews h2 {
+            position: relative;
+            text-align: center;
+            font-size: clamp(2.4rem, 5.2vw, 4rem);
+            font-weight: 900;
+            letter-spacing: -0.045em;
+            color: var(--ink);
+            margin-bottom: 50px;
+            line-height: 1;
+        }
+        .reviews-grid {
+            position: relative; z-index: 2;
+            max-width: 900px; margin: 0 auto;
+            display: flex; flex-direction: column; gap: 24px;
+        }
+        .review-card {
+            background: #fff; border-radius: 20px;
+            padding: 22px 26px;
+            box-shadow: 0 16px 34px rgba(20,40,100,0.18);
+            max-width: 540px;
+        }
+        .review-card:nth-child(1) { align-self: flex-start; }
+        .review-card:nth-child(2) { align-self: center; }
+        .review-card:nth-child(3) { align-self: flex-start; }
+        .stars { color: #fcc419; font-size: 1.1rem; letter-spacing: 2px; margin-bottom: 8px; }
+        .review-card p {
+            font-size: 1.1rem; font-weight: 700; color: var(--ink);
+            margin-bottom: 12px;
+        }
+        .reviewer { display: flex; align-items: center; gap: 10px; }
+        .reviewer .av {
+            width: 28px; height: 28px; border-radius: 50%;
+            background: linear-gradient(135deg, #cfd8dc, #90a4ae);
+            flex-shrink: 0;
+        }
+        .reviewer span { font-size: 0.9rem; color: var(--muted); font-weight: 500; }
+
+        /* ───────── FEATURES MINI GRID ───────── */
+        .features-mini {
+            padding: 100px 24px;
+            background: #fff;
+        }
+        .features-mini .section-eye {
+            text-align: center; font-size: 0.8rem; font-weight: 700;
+            letter-spacing: 0.14em; text-transform: uppercase;
+            color: var(--blue-deep); margin-bottom: 14px;
+        }
+        .features-mini h2 {
+            text-align: center;
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 900; letter-spacing: -0.04em;
+            margin-bottom: 60px; line-height: 1;
+            max-width: 720px; margin-left: auto; margin-right: auto;
+        }
+        .mini-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            max-width: 1100px; margin: 0 auto;
+        }
+        .mini-card {
+            background: #f7f8fa;
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 22px;
+            padding: 30px 28px;
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+        }
+        .mini-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(30,136,229,0.4);
+            box-shadow: 0 24px 50px rgba(30,136,229,0.12);
+            background: #fff;
+        }
+        .mini-card .pill {
+            width: 50px; height: 50px; border-radius: 14px;
+            display: inline-flex; align-items: center; justify-content: center;
+            margin-bottom: 18px;
+        }
+        .mini-card h3 { font-size: 1.2rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px; }
+        .mini-card p { color: var(--muted); font-size: 0.95rem; line-height: 1.6; font-weight: 500; }
+
+        /* ───────── SHOWCASE (App Store screenshots gallery) ───────── */
+        .showcase {
+            padding: 100px 0 120px;
+            background: var(--paper);
+            position: relative;
+            overflow: hidden;
+        }
+        .showcase::before {
+            content: ''; position: absolute; inset: 0;
+            background-image:
+                linear-gradient(rgba(30,60,120,0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(30,60,120,0.06) 1px, transparent 1px);
+            background-size: 52px 52px;
+            pointer-events: none;
+        }
+        .showcase .section-eye {
+            position: relative;
+            text-align: center; font-size: 0.8rem; font-weight: 700;
+            letter-spacing: 0.14em; text-transform: uppercase;
+            color: var(--blue-deep); margin-bottom: 14px;
+        }
+        .showcase h2 {
+            position: relative;
+            text-align: center;
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 900; letter-spacing: -0.04em;
+            margin-bottom: 50px; line-height: 1;
+        }
+        .showcase-scroll {
+            position: relative;
+            display: flex; gap: 22px;
+            overflow-x: auto;
+            padding: 24px 40px 40px;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+        }
+        .showcase-scroll::-webkit-scrollbar { display: none; }
+        .shot {
+            flex-shrink: 0; scroll-snap-align: center;
+            width: 260px; aspect-ratio: 9/19.5;
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: 0 22px 50px rgba(20,40,100,0.22);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            padding: 0; border: none; background: none;
+            position: relative;
+        }
+        .shot:hover { transform: translateY(-8px) scale(1.03); box-shadow: 0 28px 60px rgba(20,40,100,0.3); }
+        .shot:focus-visible { outline: 3px solid var(--blue-deep); outline-offset: 4px; }
+        .shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .showcase-sub {
+            position: relative;
+            text-align: center; font-size: 1.05rem; color: var(--muted);
+            font-weight: 500; margin-top: -30px; margin-bottom: 40px;
+        }
+        .showcase-hint {
+            position: relative;
+            text-align: center; font-size: 0.88rem; color: var(--muted);
+            font-weight: 500;
         }
 
-        /* ── ANIMATIONS ── */
-        .fu { opacity:0; transform:translateY(28px); transition:opacity 0.7s cubic-bezier(0.2,0.8,0.2,1), transform 0.7s cubic-bezier(0.2,0.8,0.2,1); }
-        .fu.on { opacity:1; transform:none; }
-        .d1{transition-delay:.1s} .d2{transition-delay:.2s} .d3{transition-delay:.3s} .d4{transition-delay:.4s}
+        /* ───────── LIGHTBOX MODAL ───────── */
+        .lightbox {
+            position: fixed; inset: 0; z-index: 1000;
+            background: rgba(8, 16, 32, 0.78);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: flex; align-items: center; justify-content: center;
+            padding: 40px 20px;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.35s ease;
+        }
+        .lightbox.open { opacity: 1; pointer-events: auto; }
+        .lightbox-inner {
+            display: flex; flex-direction: row; align-items: center;
+            justify-content: center;
+            gap: 56px;
+            max-width: 1080px; width: 100%;
+            transform: scale(0.86) translateY(20px);
+            transition: transform 0.45s cubic-bezier(0.34, 1.4, 0.5, 1);
+            opacity: 0;
+        }
+        .lightbox.open .lightbox-inner { transform: scale(1) translateY(0); opacity: 1; }
+        /* When alt side — flip: text on left, image on right */
+        .lightbox-inner.flip { flex-direction: row-reverse; }
+        .lightbox-media {
+            flex: 0 0 300px;
+            max-width: 300px; width: 100%;
+            border-radius: 36px;
+            overflow: hidden;
+            box-shadow: 0 40px 90px rgba(0,0,0,0.55);
+        }
+        .lightbox-img { width: 100%; display: block; }
+        .lightbox-caption {
+            flex: 1 1 0;
+            max-width: 440px; color: #fff;
+            padding: 0 8px;
+        }
+        .lightbox-caption .lb-tag {
+            display: inline-block;
+            font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.7);
+            padding: 6px 12px;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 999px;
+            margin-bottom: 18px;
+        }
+        .lightbox-caption h3 {
+            font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+            font-weight: 900; letter-spacing: -0.03em;
+            margin-bottom: 16px;
+            line-height: 1.1;
+        }
+        .lightbox-caption p {
+            font-size: 1.05rem; font-weight: 500; line-height: 1.65;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 18px;
+        }
+        .lightbox-caption ul.lb-bullets {
+            list-style: none; padding: 0; margin: 0;
+        }
+        .lightbox-caption ul.lb-bullets li {
+            position: relative;
+            padding-left: 24px;
+            font-size: 0.98rem;
+            line-height: 1.5;
+            color: rgba(255,255,255,0.78);
+            margin-bottom: 10px;
+        }
+        .lightbox-caption ul.lb-bullets li::before {
+            content: ''; position: absolute; left: 0; top: 9px;
+            width: 8px; height: 8px; border-radius: 50%;
+            background: var(--blue);
+        }
+        /* Mobile: shift title + cards + arrow down so title sits closer to viewport center */
+        @media (max-width: 780px) {
+            .hero { --y-offset: 26vh; }
+        }
+        @media (max-width: 480px) {
+            .hero { --y-offset: 34vh; }
+        }
+        @media (max-width: 780px) {
+            .lightbox-inner, .lightbox-inner.flip {
+                flex-direction: column; gap: 28px;
+                max-width: 420px;
+            }
+            .lightbox-media { flex: 0 0 auto; max-width: 240px; }
+            .lightbox-caption { text-align: center; }
+            .lightbox-caption ul.lb-bullets { text-align: left; max-width: 360px; margin: 0 auto; }
+        }
+        .lightbox-close {
+            position: absolute; top: 24px; right: 24px;
+            width: 46px; height: 46px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.95);
+            color: #0c1020;
+            border: none; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            transition: transform 0.2s, background 0.2s;
+            z-index: 2;
+        }
+        .lightbox-close:hover { transform: rotate(90deg) scale(1.08); background: #fff; }
+        body.lb-open { overflow: hidden; }
 
-        /* ── RESPONSIVE ── */
-        @media(max-width:900px){ .grid{grid-template-columns:repeat(2,1fr);} .card.full{grid-column:span 2;} }
-        @media(max-width:640px){
-            .grid{grid-template-columns:1fr;} .card.wide,.card.full{grid-column:span 1;}
-            .cta-card{padding:48px 24px;} nav{padding:0 16px;}
-            .nav-hide{display:none;}
+        /* ───────── FINAL CTA ───────── */
+        .cta-wrap {
+            padding: 120px 24px 140px;
+            background: var(--ink);
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-wrap::before {
+            content: ''; position: absolute; inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+            background-size: 48px 48px;
+        }
+        .cta-wrap::after {
+            content: ''; position: absolute;
+            width: 720px; height: 720px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(30,136,229,0.4) 0%, transparent 65%);
+            top: -200px; right: -200px; pointer-events: none;
+        }
+        .cta-inner {
+            position: relative; z-index: 2;
+            max-width: 860px; margin: 0 auto; text-align: center;
+        }
+        .cta-inner h2 {
+            font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+            font-weight: 900; line-height: 1;
+            letter-spacing: -0.045em;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+        .cta-inner h2 em {
+            font-style: normal;
+            background: linear-gradient(135deg, #90caf9 0%, #42a5f5 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .cta-inner p {
+            color: rgba(255,255,255,0.72);
+            font-size: 1.12rem; line-height: 1.7;
+            max-width: 520px; margin: 0 auto 36px;
+            font-weight: 500;
+        }
+        .btn-white {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: #fff;
+            color: var(--ink); font-weight: 800; font-size: 1rem;
+            padding: 15px 28px; border-radius: 14px;
+            text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 14px 34px rgba(255,255,255,0.2);
+        }
+        .btn-white:hover { transform: translateY(-2px); box-shadow: 0 20px 46px rgba(255,255,255,0.3); }
+
+        /* ───────── FOOTER ───────── */
+        footer {
+            padding: 52px 24px 36px;
+            background: #0f0f10;
+            color: rgba(255,255,255,0.7);
+        }
+        .footer-in {
+            max-width: 1100px; margin: 0 auto;
+            display: flex; flex-direction: column; align-items: center; gap: 22px;
+        }
+        .footer-logo {
+            display: flex; align-items: center; gap: 10px;
+            font-size: 1rem; font-weight: 800; color: #fff;
+        }
+        .footer-logo img { width: 28px; height: 28px; border-radius: 7px; }
+        .footer-links {
+            display: flex; gap: 26px; flex-wrap: wrap; justify-content: center;
+        }
+        .footer-links a {
+            color: rgba(255,255,255,0.65); font-size: 0.9rem;
+            text-decoration: none; font-weight: 500;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover { color: #fff; }
+        .footer-social {
+            display: flex; gap: 12px;
+        }
+        .footer-social a {
+            width: 42px; height: 42px; border-radius: 12px;
+            display: inline-flex; align-items: center; justify-content: center;
+            background: rgba(255,255,255,0.06);
+            transition: all 0.2s;
+        }
+        .footer-social a:hover { background: rgba(255,255,255,0.14); transform: translateY(-2px); }
+        .footer-copy { color: rgba(255,255,255,0.45); font-size: 0.82rem; text-align: center; }
+        .footer-legal { color: rgba(255,255,255,0.32); font-size: 0.72rem; text-align: center; max-width: 520px; line-height: 1.5; }
+
+        /* ───────── ANIMATIONS ───────── */
+        .fu { opacity: 0; transform: translateY(28px); transition: opacity 0.8s cubic-bezier(0.2,0.8,0.2,1), transform 0.8s cubic-bezier(0.2,0.8,0.2,1); }
+        .fu.on { opacity: 1; transform: none; }
+        .d1 { transition-delay: 0.1s; } .d2 { transition-delay: 0.2s; } .d3 { transition-delay: 0.3s; } .d4 { transition-delay: 0.4s; }
+
+        @keyframes floaty { 0%,100% { transform: translateY(0) rotate(var(--r,0deg)); } 50% { transform: translateY(-10px) rotate(var(--r,0deg)); } }
+        .floaty { animation: floaty 4.5s ease-in-out infinite; }
+
+        /* ───────── RESPONSIVE ─────────
+           Cards/notebook/pen/arrow all scale fluidly via clamp() — no breakpoints needed.
+           Below: only non-card layout adjustments (panels, nav, badges, etc.) */
+        @media (max-width: 900px) {
+            .panel-inner, .panel-inner.reverse { grid-template-columns: 1fr; gap: 40px; }
+            .panel-inner.reverse .panel-text { order: 0; }
+            .mini-grid { grid-template-columns: repeat(2, 1fr); }
+            .levels-grid { grid-template-columns: repeat(2, 1fr); }
+            .tagline-rotator { padding: 12px 22px; }
+        }
+        @media (max-width: 640px) {
+            nav { padding: 0 16px; height: 56px; }
+            .nav-hide { display: none; }
+            .hero { padding: calc(90px + var(--y-offset)) 14px 60px; min-height: auto; }
+            /* Pen stays high on mobile — don't push it down with the rest */
+            .pen-deco { top: clamp(40px, 8vw, 90px); }
+            /* Pull tagline pill + apple badge tighter under the title on mobile */
+            .hero h1 { margin-bottom: 16px; }
+            .tagline-rotator { margin: 6px auto 16px; }
+            .apple-badge { margin-bottom: 6px; }
+            .mini-grid { grid-template-columns: 1fr; }
+            .panel { padding: 70px 18px; }
+            .levels-grid { grid-template-columns: 1fr; gap: 28px; }
+            .review-card { max-width: 100%; }
+            .cta-wrap { padding: 80px 20px 100px; }
+            .tagline-rotator { padding: 10px 16px; border-radius: 16px; }
+            .apple-badge { font-size: 0.95rem; gap: 8px; }
+            .apple-badge .wreath-img { height: 40px; }
+            /* Hide the "Tap any screen…" hint on mobile — there's no lightbox to open */
+            .showcase-sub { display: none; }
         }
     </style>
 </head>
@@ -373,7 +916,7 @@
 <nav>
     <a href="/" class="nav-logo">
         <img src="icon.jpeg" alt="WordCards" onerror="this.style.display='none'">
-        WordCards
+        WordCards<span style="color:var(--blue)">.</span>
     </a>
     <div class="nav-links">
         <a href="#features" class="nav-hide">Features</a>
@@ -383,140 +926,175 @@
 </nav>
 
 <!-- HERO -->
-<section class="hero">
-    <div class="hero-badge fu"><span class="badge-dot"></span> AI-Powered English Learning</div>
-    <h1 class="fu d1">Learn English<br>the <em>smart way.</em></h1>
-    <p class="hero-sub fu d2">Master vocabulary with real-time AI conversations, <span class="yt-inline"><svg viewBox="0 0 90 20" xmlns="http://www.w3.org/2000/svg" aria-label="YouTube"><rect x="0" y="0" width="28" height="20" rx="4.5" fill="#FF0000"/><polygon points="11.5,6 11.5,14 19.5,10" fill="#fff"/><text x="33" y="15" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="14" font-weight="700" fill="#282828" letter-spacing="-0.3">YouTube</text></svg></span> video context, and spaced-repetition flashcards — all in one app.</p>
-    <div class="hero-cta fu d3">
-        <a href="https://apps.apple.com/tr/app/wordcards-learn-english/id6754776835" target="_blank" rel="noopener" class="btn-primary">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11"/></svg>
-            Download on App Store
-        </a>
-        <a href="#features" class="btn-ghost">See features ↓</a>
+<section class="hero grid-bg">
+    <div class="notebook-deco">
+        <img src="defter.png" alt="" aria-hidden="true">
     </div>
-    <div class="phones-row fu d4">
-        <div class="phone phone-side">
-            <img src="screen2.jpeg" alt="AI Chat" onerror="this.parentElement.style.background='linear-gradient(135deg,#e0e0f0,#c8c8e8)'">
-        </div>
-        <div class="phone phone-main">
-            <img src="screen1.jpeg" alt="WordCards" onerror="this.parentElement.style.background='linear-gradient(135deg,#d0d0ef,#b8b8e0)'">
-        </div>
-        <div class="phone phone-side">
-            <img src="screen3.jpeg" alt="Video" onerror="this.parentElement.style.background='linear-gradient(135deg,#e0e0f0,#c8c8e8)'">
-        </div>
+    <div class="pen-deco">
+        <img src="kalem.png" alt="" aria-hidden="true">
     </div>
-</section>
 
-<!-- FEATURES -->
-<section id="features" class="features">
-    <div class="section-eye fu">Everything you need</div>
-    <h2 class="section-h fu d1">Why learners love<br>WordCards</h2>
-    <div class="grid">
-        <div class="card wide fu"> 
-            <div class="icon-pill ip-purple">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1e88e5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><circle cx="9" cy="10" r="1" fill="#1e88e5"/><circle cx="12" cy="10" r="1" fill="#1e88e5"/><circle cx="15" cy="10" r="1" fill="#1e88e5"/></svg>
-            </div>
-            <h3>AI Conversations</h3>
-            <p>Chat freely with an AI tutor that gives instant feedback on your grammar and vocabulary. Like having a private teacher available 24/7 — without the cost.</p>
+    <!-- Scattered level cards around the title -->
+    <div class="scatter-wrap s-a2"><img src="A2_RM.png" alt="" aria-hidden="true"></div>
+    <div class="scatter-wrap s-b1"><img src="B1_RM.png" alt="" aria-hidden="true"></div>
+    <div class="scatter-wrap s-b2"><img src="B2_RM.png" alt="" aria-hidden="true"></div>
+    <div class="scatter-wrap s-pv"><img src="PV_RM.png" alt="" aria-hidden="true"></div>
+
+    <!-- A1 (top-left, highest) and C1 (bottom-right, lowest) cards beside the title -->
+    <div class="fcard-wrap a1">
+        <img src="A1_RM.png" alt="A1 Beginner Level card">
+        <div class="cardtag">Beginner</div>
+    </div>
+    <div class="fcard-wrap c1">
+        <img src="C1_RM.png" alt="C1 Advanced Level card">
+        <div class="cardtag">Advanced</div>
+    </div>
+
+    <!-- Decorative arrow behind the title -->
+    <svg class="arrow-curve" viewBox="0 0 260 220" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="none">
+        <path d="M30 30 C 20 110, 120 180, 230 150" stroke="#2c7be5" stroke-width="5" stroke-linecap="round" fill="none"/>
+        <path d="M220 140 L 234 150 L 222 164" stroke="#2c7be5" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </svg>
+
+    <div class="hero-inner">
+        <h1 class="fu d1">
+            Learn<br>
+            <span class="hl">English</span><br>
+            Words Fast
+        </h1>
+
+        <div class="tagline-rotator fu d1" aria-live="polite">
+            <span class="tagline active">Learn and reinforce with <span class="ted-accent">TED</span>-Ed videos</span>
+            <span class="tagline">Level up with a TikTok-style swipeable quiz flow</span>
+            <span class="tagline">Speak out loud with an AI voice coach, anytime</span>
+            <span class="tagline">Master A1 → C1 at your own pace</span>
+            <span class="tagline">Every word in a memorable story — not just a list</span>
         </div>
-        <div class="card fu d1">
-            <div class="icon-pill ip-pink">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e05c8a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+
+        <div class="apple-badge fu d2">
+            <img src="sol_kanat.png" class="wreath-img" alt="" aria-hidden="true">
+            <div class="text-row">
+                <span class="apple-logo">
+                    <svg width="18" height="22" viewBox="0 0 14 17" fill="#1a1a1a" aria-hidden="true"><path d="M11.5 8.5c0-1.8 1.2-2.6 1.2-2.6-.7-1-1.7-1.1-2.1-1.1-.9-.1-1.7.5-2.2.5s-1.2-.5-1.9-.5c-1 0-1.9.6-2.4 1.5-1 1.8-.3 4.4.7 5.9.5.7 1 1.4 1.7 1.4.7 0 1-.4 1.9-.4s1.1.4 1.9.4c.8 0 1.3-.7 1.7-1.4.5-.8.8-1.6.8-1.6s-1.3-.6-1.3-2.1zM9.8 3.7c.4-.5.7-1.2.6-2-.6 0-1.4.4-1.8.9-.4.4-.8 1.2-.7 1.9.7.1 1.5-.3 1.9-.8z"/></svg>
+                </span>
+                <span>Apps we love</span>
             </div>
-            <h3>Voice Chat</h3>
-            <p>Practice speaking out loud with real-time AI voice conversations. Build confidence and natural fluency fast.</p>
+            <img src="sag_kanat.png" class="wreath-img" alt="" aria-hidden="true">
         </div>
-        <div class="card fu">
-            <div class="icon-pill ip-blue">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#42a5f5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polygon points="10,9 16,12 10,15" fill="#42a5f5" stroke="none"/></svg>
-            </div>
-            <h3>Video Context</h3>
-            <p>See words used in real YouTube clips and TED-Ed videos. Context makes vocabulary stick for good.</p>
-        </div>
-        <div class="card fu d1">
-            <div class="icon-pill ip-green">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4caf82" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
-            </div>
-            <h3>Smart Review</h3>
-            <p>Spaced repetition shows you words exactly when you're about to forget them. Science-backed, effortlessly effective.</p>
-        </div>
-        <div class="card fu d2">
-            <div class="icon-pill ip-orange">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f5a623" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="1" y1="1" x2="23" y2="23"/><path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"/><path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"/><path d="M10.71 5.05A16 16 0 0 1 22.56 9"/><path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20" stroke-width="3" stroke-linecap="round"/></svg>
-            </div>
-            <h3>Offline Mode</h3>
-            <p>Download your decks and keep learning on the subway, on a plane, anywhere. No internet needed.</p>
+
+        <div class="hero-cta fu d4">
+            <a href="https://apps.apple.com/tr/app/wordcards-learn-english/id6754776835" target="_blank" rel="noopener" class="btn-primary">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11"/></svg>
+                Download on App Store
+            </a>
         </div>
     </div>
 </section>
 
-<!-- POWERED BY YOUTUBE -->
-<section class="yt-section fu">
-    <p class="yt-label">Video content powered by</p>
-    <a href="https://www.youtube.com" target="_blank" rel="noopener" class="yt-logo-link" aria-label="YouTube">
-        <svg class="yt-logo" viewBox="0 0 90 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <!-- YouTube play button icon -->
-            <rect x="0" y="0" width="28" height="20" rx="4.5" fill="#FF0000"/>
-            <polygon points="11.5,6 11.5,14 19.5,10" fill="#fff"/>
-            <!-- YouTube wordmark -->
-            <text x="33" y="15" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="14" font-weight="700" fill="#282828" letter-spacing="-0.3">YouTube</text>
-        </svg>
-    </a>
-    <p class="yt-sub">Every word includes a real YouTube clip showing it in context</p>
-</section>
-
-<!-- SCREENSHOTS -->
-<section class="screens">
+<!-- SHOWCASE GALLERY — single clean section replacing all feature panels -->
+<section class="showcase" id="features">
     <div class="section-eye fu">A glance inside</div>
-    <h2 class="section-h fu d1">See it in action</h2>
-    <div class="screens-scroll fu d2">
-        <div class="screen-card"><img src="screen1.jpeg" alt="Flashcards" onerror="this.parentElement.style.background='#e8e8f0'"></div>
-        <div class="screen-card"><img src="screen2.jpeg" alt="AI Chat" onerror="this.parentElement.style.background='#e0e8f8'"></div>
-        <div class="screen-card"><img src="screen3.jpeg" alt="Video" onerror="this.parentElement.style.background='#e8e0f8'"></div>
-        <div class="screen-card"><img src="screen4.jpeg" alt="Progress" onerror="this.parentElement.style.background='#e8f0e0'"></div>
+    <h2 class="fu d1">See it in action</h2>
+    <p class="showcase-sub fu d1">Tap any screen to take a closer look.</p>
+    <div class="showcase-scroll fu d2">
+        <button class="shot"
+            data-tag="Home"
+            data-title="A calm, focused home."
+            data-desc="Open the app and you land on a peaceful screen built around one idea: pick up where you left off and learn one more word today."
+            data-bullets="Continue your current deck instantly|Daily goal at a glance|No noisy feeds, no ads, just learning">
+            <img src="1.jpg" alt="WordCards home">
+        </button>
+        <button class="shot"
+            data-tag="CEFR • A1 → C1"
+            data-title="Master English from A1 to C1."
+            data-desc="Every deck is hand-curated to match the CEFR scale. Start at your true level and climb all the way to fluency — without guessing what to learn next."
+            data-bullets="6 levels from beginner to advanced|Thousands of carefully chosen words|Skip or accelerate any level anytime">
+            <img src="2.jpg" alt="Levels A1 to C1">
+        </button>
+        <button class="shot"
+            data-tag="All-in-one card"
+            data-title="Everything about a word — in one place."
+            data-desc="No more juggling ten tabs. A single, beautiful card holds the meaning, example sentences, native audio, synonyms and real-world usage."
+            data-bullets="Meaning &amp; example sentences|Native UK + US audio|Synonyms, antonyms &amp; collocations">
+            <img src="3.jpg" alt="All in one card">
+        </button>
+        <button class="shot"
+            data-tag="Pronunciation &amp; grammar"
+            data-title="Pronunciation and conjugation, instantly."
+            data-desc="Hear every word in two native accents, study its etymology and see every tense laid out — all in a distraction-free, readable view."
+            data-bullets="Native UK &amp; US pronunciation|Full verb conjugation tables|Etymology &amp; word family view">
+            <img src="4.jpg" alt="Pronunciation and conjugation">
+        </button>
+        <button class="shot"
+            data-tag="TED-Ed videos"
+            data-title="Context that sticks, with TED-Ed."
+            data-desc="Every tough word comes with a short, beautifully animated TED-Ed lesson. Seeing a word inside a story is how it finally stays in your memory."
+            data-bullets="Curated short animations per word|Interactive transcripts|Replay, slow down, save clips">
+            <img src="5.jpg" alt="TED-Ed videos">
+        </button>
+        <button class="shot"
+            data-tag="AI chat"
+            data-title="Chat in English. Get instant feedback."
+            data-desc="Type freely and the AI tutor quietly points out mistakes, suggests more natural phrasing and explains the why — in plain English."
+            data-bullets="Real-time grammar &amp; vocab fixes|Natural phrasing suggestions|Friendly, patient tone — always">
+            <img src="6.jpg" alt="Chat with feedback">
+        </button>
+        <button class="shot"
+            data-tag="AI voice"
+            data-title="Speak out loud with an AI voice coach."
+            data-desc="Practice real conversations by voice. The AI listens, understands and replies in a calm, natural voice — so you build the confidence to speak without freezing."
+            data-bullets="Natural back-and-forth speaking|Pronunciation feedback|Role-play real scenarios (café, interview, travel)">
+            <img src="7.jpg" alt="AI voice chat">
+        </button>
+        <button class="shot"
+            data-tag="TikTok-style quiz"
+            data-title="A swipeable quiz flow you actually enjoy."
+            data-desc="Short, addictive cards you swipe through like a social feed — but every swipe locks one more English word into long-term memory."
+            data-bullets="Vertical swipe flow, like short-form video|Mixes multiple-choice, listening &amp; typing|Smart spaced repetition under the hood">
+            <img src="8.jpg" alt="Swipeable quiz flow">
+        </button>
+        <button class="shot"
+            data-tag="Insights"
+            data-title="Watch your English grow, visually."
+            data-desc="A clear dashboard shows exactly how many words you know at each level, your streak and what to tackle next — momentum, visualized."
+            data-bullets="Words learned by CEFR level|Daily &amp; weekly streaks|Personalized next-step suggestions">
+            <img src="9.jpg" alt="Insights and progress">
+        </button>
+        <button class="shot"
+            data-tag="Your space"
+            data-title="A profile that grows with you."
+            data-desc="Your decks, achievements and settings all in one calm place. Take WordCards with you across devices and pick up exactly where you left off."
+            data-bullets="Saved decks &amp; favorites|Achievements &amp; milestones|Sync across iPhone &amp; iPad">
+            <img src="10.jpg" alt="Profile and settings">
+        </button>
     </div>
-    <p class="screens-hint">← swipe to explore →</p>
+    <p class="showcase-hint">← swipe to explore →</p>
 </section>
 
-<!-- SOCIAL MEDIA -->
-<section class="social-section fu">
-    <div class="section-eye">Follow us</div>
-    <h2>Stay in the loop</h2>
-    <p>Tips, updates, and English learning content — follow WordCards on social media.</p>
-    <div class="social-pills">
-        <!-- Instagram -->
-        <a href="https://www.instagram.com/wordcardsapp" target="_blank" rel="noopener" class="social-pill ig">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="2" y="2" width="20" height="20" rx="5.5" stroke="currentColor" stroke-width="2"/>
-                <circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="2"/>
-                <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
-            </svg>
-            Instagram
-        </a>
-        <!-- TikTok -->
-        <a href="https://www.tiktok.com/@wordcardsapp" target="_blank" rel="noopener" class="social-pill tt">
-            <svg width="17" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.86a8.16 8.16 0 004.77 1.52V6.93a4.85 4.85 0 01-1-.24z"/>
-            </svg>
-            TikTok
-        </a>
-        <!-- YouTube -->
-        <a href="https://youtube.com/@wordcardslearnenglish" target="_blank" rel="noopener" class="social-pill yt">
-            <svg width="20" height="14" viewBox="0 0 24 17" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path d="M23.5 2.5A3 3 0 0021.4.4C19.5 0 12 0 12 0S4.5 0 2.6.4A3 3 0 00.5 2.5 31 31 0 000 8.5a31 31 0 00.5 6A3 3 0 002.6 16.6C4.5 17 12 17 12 17s7.5 0 9.4-.4a3 3 0 002.1-2.1 31 31 0 00.5-6 31 31 0 00-.5-6z"/>
-                <polygon points="9.75,12.02 15.5,8.5 9.75,4.98" fill="white"/>
-            </svg>
-            YouTube
-        </a>
+<!-- LIGHTBOX MODAL -->
+<div class="lightbox" id="lightbox" aria-hidden="true" role="dialog">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+    </button>
+    <div class="lightbox-inner" id="lightboxInner">
+        <div class="lightbox-media">
+            <img class="lightbox-img" id="lightboxImg" src="" alt="">
+        </div>
+        <div class="lightbox-caption">
+            <span class="lb-tag" id="lightboxTag"></span>
+            <h3 id="lightboxTitle"></h3>
+            <p id="lightboxDesc"></p>
+            <ul class="lb-bullets" id="lightboxBullets"></ul>
+        </div>
     </div>
-</section>
+</div>
 
 <!-- CTA -->
 <section class="cta-wrap">
-    <div class="cta-card fu">
-        <h2>Start learning today.<br>It's free.</h2>
-        <p>Join learners already using WordCards to level up their English — one word at a time.</p>
-        <a href="https://apps.apple.com/tr/app/wordcards-learn-english/id6754776835" target="_blank" rel="noopener" class="btn-white">
+    <div class="cta-inner">
+        <h2 class="fu">Start learning <em>today</em><br>It's free</h2>
+        <p class="fu d1">Join learners already using WordCards to level up their English — one word at a time.</p>
+        <a href="https://apps.apple.com/tr/app/wordcards-learn-english/id6754776835" target="_blank" rel="noopener" class="btn-white fu d2">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11"/></svg>
             Download on App Store
         </a>
@@ -536,38 +1114,183 @@
             <a href="/support">Support</a>
             <a href="mailto:wordcards.helpdesk@gmail.com">Contact</a>
         </div>
-        <div class="social-links">
-            <a href="https://www.instagram.com/wordcardsapp" target="_blank" rel="noopener" class="social-btn ig" aria-label="Instagram">
-                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#e1306c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="2" y="2" width="20" height="20" rx="5.5"/>
-                    <circle cx="12" cy="12" r="4.5"/>
-                    <circle cx="17.5" cy="6.5" r="1" fill="#e1306c" stroke="none"/>
-                </svg>
+        <div class="footer-social">
+            <a href="https://www.instagram.com/wordcardsapp" target="_blank" rel="noopener" aria-label="Instagram">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1" fill="#fff" stroke="none"/></svg>
             </a>
-            <a href="https://www.tiktok.com/@wordcardsapp" target="_blank" rel="noopener" class="social-btn tt" aria-label="TikTok">
-                <svg width="16" height="17" viewBox="0 0 24 24" fill="#010101">
-                    <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.86a8.16 8.16 0 004.77 1.52V6.93a4.85 4.85 0 01-1-.24z"/>
-                </svg>
+            <a href="https://www.tiktok.com/@wordcardsapp" target="_blank" rel="noopener" aria-label="TikTok">
+                <svg width="17" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.86a8.16 8.16 0 004.77 1.52V6.93a4.85 4.85 0 01-1-.24z"/></svg>
             </a>
-            <a href="https://youtube.com/@wordcardslearnenglish" target="_blank" rel="noopener" class="social-btn yt" aria-label="YouTube">
-                <svg width="19" height="13" viewBox="0 0 24 17" fill="#ff0000">
-                    <path d="M23.5 2.5A3 3 0 0021.4.4C19.5 0 12 0 12 0S4.5 0 2.6.4A3 3 0 00.5 2.5 31 31 0 000 8.5a31 31 0 00.5 6A3 3 0 002.6 16.6C4.5 17 12 17 12 17s7.5 0 9.4-.4a3 3 0 002.1-2.1 31 31 0 00.5-6 31 31 0 00-.5-6z"/>
-                    <polygon points="9.75,12.02 15.5,8.5 9.75,4.98" fill="white"/>
-                </svg>
+            <a href="https://youtube.com/@wordcardslearnenglish" target="_blank" rel="noopener" aria-label="YouTube">
+                <svg width="20" height="14" viewBox="0 0 24 17" fill="#fff"><path d="M23.5 2.5A3 3 0 0021.4.4C19.5 0 12 0 12 0S4.5 0 2.6.4A3 3 0 00.5 2.5 31 31 0 000 8.5a31 31 0 00.5 6A3 3 0 002.6 16.6C4.5 17 12 17 12 17s7.5 0 9.4-.4a3 3 0 002.1-2.1 31 31 0 00.5-6 31 31 0 00-.5-6z"/><polygon points="9.75,12.02 15.5,8.5 9.75,4.98" fill="#0f0f10"/></svg>
             </a>
         </div>
         <div class="footer-copy">&copy; 2026 WordCards. All rights reserved.</div>
-        <div class="footer-legal">Apple and the Apple logo are trademarks of Apple Inc. App Store is a service mark of Apple Inc.</div>
-        <div class="footer-legal">Video content powered by <a href="https://www.youtube.com" target="_blank" rel="noopener" style="color:#c7c7cc;text-decoration:underline;">YouTube</a>. YouTube is a trademark of Google LLC.</div>
+        <div class="footer-legal">Apple and the Apple logo are trademarks of Apple Inc. App Store is a service mark of Apple Inc. Video content powered by YouTube. YouTube is a trademark of Google LLC.</div>
     </div>
 </footer>
 
 <script>
+    // fade-up animation
     const io = new IntersectionObserver(
         entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); }),
-        { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }
+        { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
     );
     document.querySelectorAll('.fu').forEach(el => io.observe(el));
+
+    // Parallax on notebook & pen — they pull back (outward / upward) as user scrolls
+    const notebook = document.querySelector('.notebook-deco');
+    const pen = document.querySelector('.pen-deco');
+    let ticking = false;
+    function updateParallax() {
+        const y = window.scrollY;
+        if (notebook) {
+            // slide left-down out of view
+            const t = Math.min(y, 800);
+            notebook.style.transform = `translate3d(${-t * 0.5}px, ${t * 0.2}px, 0) rotate(0deg)`;
+        }
+        if (pen) {
+            // pen lies at 45° — slides up-right out of view while keeping its tilt
+            const t = Math.min(y, 800);
+            pen.style.transform = `translate3d(${t * 0.55}px, ${-t * 0.35}px, 0) rotate(${-45 + t * 0.05}deg)`;
+        }
+        ticking = false;
+    }
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            requestAnimationFrame(updateParallax);
+            ticking = true;
+        }
+    }, { passive: true });
+
+    // ─── Rotating tagline under the hero title ───
+    const taglines = document.querySelectorAll('.tagline-rotator .tagline');
+    if (taglines.length > 1) {
+        let tagIndex = 0;
+        function rotateTagline() {
+            const current = taglines[tagIndex];
+            current.classList.remove('active');
+            current.classList.add('leaving');
+            setTimeout(() => current.classList.remove('leaving'), 650);
+
+            tagIndex = (tagIndex + 1) % taglines.length;
+            const next = taglines[tagIndex];
+            // small gap so the leaving one starts fading first
+            setTimeout(() => next.classList.add('active'), 220);
+        }
+        // Wait for hero entrance to settle, then rotate every 3.8s
+        setTimeout(() => {
+            rotateTagline();
+            setInterval(rotateTagline, 3800);
+        }, 4000);
+    }
+
+    // ─── Lightbox for showcase screenshots ───
+    const lightbox = document.getElementById('lightbox');
+    const lbInner = document.getElementById('lightboxInner');
+    const lbImg = document.getElementById('lightboxImg');
+    const lbTag = document.getElementById('lightboxTag');
+    const lbTitle = document.getElementById('lightboxTitle');
+    const lbDesc = document.getElementById('lightboxDesc');
+    const lbBullets = document.getElementById('lightboxBullets');
+    const lbClose = document.getElementById('lightboxClose');
+    const allShots = document.querySelectorAll('.shot');
+
+    function openLightbox(shot) {
+        const img = shot.querySelector('img');
+        lbImg.src = img.src;
+        lbImg.alt = img.alt;
+
+        const tag = shot.dataset.tag || '';
+        lbTag.innerHTML = tag;
+        lbTag.style.display = tag ? 'inline-block' : 'none';
+
+        lbTitle.innerHTML = shot.dataset.title || '';
+        lbDesc.innerHTML = shot.dataset.desc || '';
+
+        // Build bullet list from pipe-separated data-bullets
+        const bullets = (shot.dataset.bullets || '').split('|').map(s => s.trim()).filter(Boolean);
+        lbBullets.innerHTML = bullets.map(b => `<li>${b}</li>`).join('');
+
+        // Alternate sides: even index → image left, odd index → image right
+        const index = Array.from(allShots).indexOf(shot);
+        lbInner.classList.toggle('flip', index % 2 === 1);
+
+        lightbox.classList.add('open');
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('lb-open');
+    }
+    function closeLightbox() {
+        lightbox.classList.remove('open');
+        lightbox.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('lb-open');
+    }
+    allShots.forEach(shot => {
+        shot.addEventListener('click', () => {
+            // On mobile, just let the user swipe — don't pop the lightbox
+            if (window.matchMedia('(max-width: 780px)').matches) return;
+            openLightbox(shot);
+        });
+    });
+    lbClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', e => {
+        if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
+    });
+
+    // ─── Desktop click-and-drag for the showcase scroll ───
+    const showcaseScroll = document.querySelector('.showcase-scroll');
+    if (showcaseScroll) {
+        let isDown = false;
+        let startX = 0;
+        let startScroll = 0;
+        let dragMoved = false;
+
+        showcaseScroll.addEventListener('mousedown', e => {
+            isDown = true;
+            dragMoved = false;
+            startX = e.pageX;
+            startScroll = showcaseScroll.scrollLeft;
+            showcaseScroll.style.cursor = 'grabbing';
+            showcaseScroll.style.scrollSnapType = 'none';
+        });
+        window.addEventListener('mouseup', () => {
+            if (!isDown) return;
+            isDown = false;
+            showcaseScroll.style.cursor = '';
+            showcaseScroll.style.scrollSnapType = '';
+        });
+        window.addEventListener('mousemove', e => {
+            if (!isDown) return;
+            const dx = e.pageX - startX;
+            if (Math.abs(dx) > 4) dragMoved = true;
+            showcaseScroll.scrollLeft = startScroll - dx;
+            e.preventDefault();
+        });
+        // Prevent the lightbox from opening if the user actually dragged
+        allShots.forEach(shot => {
+            shot.addEventListener('click', e => {
+                if (dragMoved) {
+                    e.stopImmediatePropagation();
+                    e.preventDefault();
+                    dragMoved = false;
+                }
+            }, true);
+        });
+        // Set the grab cursor as a hint that the strip is draggable
+        showcaseScroll.style.cursor = 'grab';
+
+        // Also let the mouse wheel scroll horizontally over the showcase
+        showcaseScroll.addEventListener('wheel', e => {
+            if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+                showcaseScroll.scrollLeft += e.deltaY;
+                e.preventDefault();
+            }
+        }, { passive: false });
+    }
 </script>
+
 </body>
 </html>
